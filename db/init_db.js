@@ -4,7 +4,7 @@ const {
   createUser,
 } = require('./models/user');
 
-const { createProduct } = require('./models/products');
+const { createProduct, getAllProducts, getProductById } = require('./models/products');
 const { createOrder } = require('./models/orders');
 
 const client = require('./client');
@@ -46,7 +46,7 @@ async function buildTables() {
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) UNIQUE NOT NULL,
       description TEXT NOT NULL,
-      price INTEGER NOT NULL,
+      price DECIMAL(10, 2) NOT NULL,
       imageURL TEXT,
       "inStock" BOOLEAN DEFAULT false,
       category TEXT NOT NULL
@@ -118,9 +118,9 @@ async function populateInitialData() {
         datePlaced: '2-4-2022',
       },
     ];
-    // const orders = await Promise.all(ordersToCreate.map((createOrder));
-    console.log('Orders created');
-    // console.log(orders);
+    const orders = await Promise.all(ordersToCreate.map(createOrder));
+    console.log('Orders created:');
+    console.log(orders);
   } catch (error) {
     console.error('Error populating initial data!');
     throw error;
@@ -132,16 +132,12 @@ async function rebuildDB() {
     client.connect();
     await dropTables();
     await buildTables();
-    // await populateInitialData();
+    await populateInitialData();
   } catch (error) {
     console.log('Error during rebuildDB');
     throw error;
   }
 }
-// buildTables()
-//   .then(populateInitialData)
-//   .catch(console.error)
-//   .finally(() => client.end());
 
 module.exports = {
   rebuildDB,
