@@ -1,20 +1,21 @@
 const client = require('../client');
 
-const createOrders = async () => {
-    try {
-        const {rows: [order]} = await client.query(`
-        CREATE TABLE order(
-            id SERIAL PRIMARY KEY,
-            status DEFAULT VALUE created,
-            userId REFRENCES users(id),
-            datePlaced DATE
-        )
-        `, []);
+const createOrder = async ({ status, userId, datePlaced }) => {
+  try {
+    const {
+      rows: [order],
+    } = await client.query(
+      `
+    INSERT INTO orders(status, "userId", "datePlaced")
+    VALUES ($1, $2, $3)
+    RETURNING *
+    `,
+      [status, userId, datePlaced]
+    );
+    return order;
+  } catch (error) {
+    throw error;
+  }
+};
 
-        return order
-    } catch (error) {
-        throw error;
-    }
-}
-
-module.export = createOrders
+module.exports = { createOrder };

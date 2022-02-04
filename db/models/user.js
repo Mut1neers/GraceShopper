@@ -4,21 +4,24 @@ const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
 // user functions
-async function createUser({ username, password }) {
+async function createUser({ firstName, lastName, email, imageURL, username, password, isAdmin }) {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(username, password) VALUES ($1, $2)
+      INSERT INTO users(firstName, lastName, email, imageURL, username, password, "isAdmin") 
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       ON CONFLICT (username) DO NOTHING 
-      RETURNING id, username
+      RETURNING id, username, firstName, lastName, email, imageURL, "isAdmin"
     `,
-      [username, hashedPassword]
+      [firstName, lastName, email, imageURL, username, hashedPassword, isAdmin]
     );
     return user;
   } catch (error) {
+    console.log('Error creating user');
+    console.error(error);
     throw error;
   }
 }
