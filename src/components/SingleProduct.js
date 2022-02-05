@@ -3,7 +3,11 @@ import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } fro
 import { AddShoppingCart } from '@material-ui/icons';
 import { mergeClasses } from '@material-ui/styles';
 
+<<<<<<< HEAD:src/components/SingleProduct.js
 export const SingleProduct = () => {
+=======
+const SingleProduct = () => {
+>>>>>>> 992ba2d2b050daac4f2686c94d46af1d434066d8:src/components/Product.js
    return (
        <Card className={classes.root}>
            <CardMedia className = {classes.media} image='' title={product.name} />

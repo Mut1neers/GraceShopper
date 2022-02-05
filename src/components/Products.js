@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core';
+import { SingleProduct } from './SingleProduct';
 
 const products = [
     { id: 1, name: 'Ape NFT', description: 'Fake Ape NFT' },
