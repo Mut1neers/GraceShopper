@@ -1,4 +1,5 @@
 const client = require('../client');
+const { getUserById } = require('./user');
 
 const createOrder = async ({ status, userId, datePlaced }) => {
   try {
@@ -18,4 +19,55 @@ const createOrder = async ({ status, userId, datePlaced }) => {
   }
 };
 
-module.exports = { createOrder };
+async function getAllOrders() {
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT * 
+      FROM orders;
+      `
+    );
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getOrderById(orderId) {
+  try {
+    const {
+      rows: [order],
+    } = await client.query(
+      `
+      SELECT *
+      FROM order
+      WHERE id = $1
+      `,
+      [orderId]
+    );
+    return order;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// vvvvvv unsure about this guy vvvvvvv
+async function getOrdersByUser({ id }) {
+  try {
+    const user = await getUserById(id);
+    const { rows: orders } = await client.query(
+      `
+    SELECT orders.*, users.username AS "creatorName"
+    FROM orders
+    JOIN users ON orders."creatorId" = users.id
+    WHERE "creatorId" = $1
+    `,
+      [user.id]
+    );
+    // console.log('ORDERS: ', orders);
+    return orders;
+  } catch (error) {
+    throw error;
+  }
+}
+module.exports = { createOrder, getAllOrders, getOrdersByUser };
