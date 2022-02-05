@@ -3,7 +3,7 @@ import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } fro
 import { AddShoppingCart } from '@material-ui/icons';
 import { mergeClasses } from '@material-ui/styles';
 
-const Product = () => {
+const SingleProduct = () => {
    return (
        <Card className={classes.root}>
            <CardMedia className = {classes.media} image='' title={product.name} />
@@ -27,4 +27,4 @@ const Product = () => {
    ) 
 }
 
-export default Product;
+export default SingleProduct;
