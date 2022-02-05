@@ -14,7 +14,7 @@ const App = () => {
     // invoke the adapter, await the response, and set the data
     const getAPIStatus = async () => {
       const { healthy } = await getAPIHealth();
-      setAPIHealth(healthy ? 'api is up! :D' : 'api is down :/');
+      setAPIHealth(healthy ? 'api is actually freaking working! :D' : 'api is down :/');
     };
 
     // second, after you've defined your getter above
