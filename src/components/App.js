@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { Products, Navbar } from './';
+import { Products, NavBar } from './';
+
 
 // getAPIHealth is defined in our axios-services directory index.js
 // you can think of that directory as a collection of api adapters
@@ -8,9 +9,10 @@ import { Products, Navbar } from './';
 import { getAPIHealth } from '../axios-services';
 import '../style/App.css';
 
+
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
-
+  
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
     // first, create an async function that will wrap your axios service adapter
@@ -27,7 +29,7 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <Navbar />
+      <NavBar />
       <Products />
       
       <p>API Status: {APIHealth}</p>

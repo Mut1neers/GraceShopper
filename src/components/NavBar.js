@@ -13,7 +13,7 @@ const NavBar = () => {
             <AppBar position='fixed' className={classes.appbar} color='inherit'>
                 <Toolbar>
                     <Typography variatnt='h5' className={classes.title} color='inherit'>
-                        <img src={} atl='rightClicked' height='25px' className={classes.image}/>
+                        {/* <img src={} atl='rightClicked' height='25px' className={classes.image}/> */}
                     </Typography>
                     <div className={classes.grow} />
                     <div className={classes.button}>
@@ -28,3 +28,5 @@ const NavBar = () => {
        </>
    ) 
 }
+
+export default NavBar;

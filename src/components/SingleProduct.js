@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
 import { AddShoppingCart } from '@material-ui/icons';
-// import { mergeClasses } from '@material-ui/styles';
+import { mergeClasses } from '@material-ui/styles';
 
 import useStyles from './productStyles';
 
