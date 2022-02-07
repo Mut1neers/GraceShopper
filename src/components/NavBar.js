@@ -14,6 +14,7 @@ const NavBar = () => {
                 <Toolbar>
                     <Typography variatnt='h5' className={classes.title} color='inherit'>
                         {/* <img src={} atl='rightClicked' height='25px' className={classes.image}/> */}
+                        <h1>rightClicked Marketplace</h1>
                     </Typography>
                     <div className={classes.grow} />
                     <div className={classes.button}>
