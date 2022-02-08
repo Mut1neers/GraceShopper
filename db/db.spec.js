@@ -1,7 +1,7 @@
 const client = require('./client');
 const bcrypt = require('bcrypt');
 const { rebuildDB } = require('./init_db');
-const { getAllOrders, createOrder } = require('./models/orders');
+const { getAllOrders, createOrder, getOrdersByUser } = require('./models/orders');
 const { createUser, getUserById, getUser } = require('./models/user');
 const { getAllProducts, createProduct, getProductById } = require('./models/products');
 
@@ -115,6 +115,28 @@ describe('Database', () => {
         expect(createdOrder.userId).toBe(orderToCreate.userId);
         expect(createdOrder.status).toBe(orderToCreate.status);
       });
+    });
+    describe('getOrdersByUser', () => {
+      let order, user;
+      beforeAll(async () => {
+        user = await getUserById(1);
+        [order] = await getOrdersByUser(user);
+      });
+      it('selects and return an array of all orders made by user', async () => {
+        expect(order).toEqual(
+          expect.objectContaining({
+            id: expect.any(Number),
+            status: expect.any(String),
+            productId: expect.any(Number),
+            datePlaced: expect.any(Date),
+          })
+        );
+      });
+    });
+    describe('getOrdersByProduct', () => {
+      it(
+        'selects and returns an array of orders which have a specific productId in their order_products join, include their products'
+      );
     });
   });
 });

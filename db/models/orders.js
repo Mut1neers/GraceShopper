@@ -1,4 +1,5 @@
 const client = require('../client');
+const { getProductById } = require('./products');
 const { getUserById } = require('./user');
 
 const createOrder = async ({ status, userId, datePlaced }) => {
@@ -57,14 +58,53 @@ async function getOrdersByUser({ id }) {
     const user = await getUserById(id);
     const { rows: orders } = await client.query(
       `
-    SELECT orders.*, users.username AS "creatorName"
+    SELECT orders.*, users.username AS "customerName"
     FROM orders
-    JOIN users ON orders."creatorId" = users.id
-    WHERE "creatorId" = $1
+    JOIN users ON orders."userId" = users.id
+    WHERE "userId" = $1
     `,
       [user.id]
     );
-    // console.log('ORDERS: ', orders);
+    return orders;
+  } catch (error) {
+    throw error;
+  }
+}
+// vvvv unsure about this guy too vvvvv
+async function getOrdersByProduct({ id }) {
+  try {
+    const product = await getProductById(id);
+    const { rows: orders } = await client.query(
+      `
+      SELECT orders.*, users.username AS "customerName"
+      FROM orders
+      JOIN users ON orders."userId" = users.id
+      JOIN order_products ON order_products."productId" = orders.id
+      WHERE orders.status = 'created'
+      AND order_products."productId" = $1;
+      `,
+      [product.id]
+    );
+    return orders;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getCartByUser({ id }) {
+  try {
+    const user = await getOrdersByUser(id);
+    const { rows: orders } = await client.query(
+      `
+      SELECT orders.*, users.username AS "customerName"
+      FROM orders
+      JOIN users ON orders."userId" = users.id
+      JOIN order_products ON order_products."productId" = orders.id
+      WHERE orders.status = 'created'
+      AND order_products."productId" = $1;
+      `,
+      [user.id]
+    );
     return orders;
   } catch (error) {
     throw error;
