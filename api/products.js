@@ -5,7 +5,7 @@ const express = require("express");
 const {getAllProducts,getProductById} = require ("../db")
 const productsRouter = express.Router();
 //productsRouter.get("/products");
-productsRouter.use((req, res, next) =>{console.log("request being made /products")})
+productsRouter.use((req, res, next) =>{console.log("request being made /products");next()})
 
 productsRouter.get("/", async (req, res, next) => {
     try { const products = await getAllProducts()
