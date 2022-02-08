@@ -4,26 +4,24 @@ import { SingleProduct } from './';
 
 
 
+const products = [
+    { id: 1, name: 'Ape NFT', description: 'Fake Ape NFT', price: '$5', image:'https://tinyurl.com/yu6beu5k'},
+    { id: 2, name: 'Glitter Sparkle Bomb NFT', description: 'Fake special made glitter bomb NFT ', price: '10$', image:'https://tinyurl.com/5h492yta'},
+  ];
 
-
- const Products = () => {
-    const products = [
-        { id: 1, name: 'Ape NFT', description: 'Fake Ape NFT', price: '$5' },
-        { id: 2, name: 'Glitter Sparkle Bomb NFT', description: 'Fake special made glitter bomb NFT ', price: '10$'},
-      ];
-  return ( 
-   <main>
-        
-        <Grid container justify='center' spacing={4}>
-            {products.map((product) => {
-                return (
-                    <SingleProduct 
-                    key={product.id}
-                    product={product}
+const Products = () => {
+    return ( 
+        <main>
+            <Grid container justify='center' spacing={4}>
+                {products.map((product) => (
+                    <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+                        <SingleProduct 
+                        key={product.id}
+                        product={product}
                     />
-                )
-            })}
-        </Grid>
+                    </Grid>
+            ))}
+            </Grid>
     </main>
   )
 }
