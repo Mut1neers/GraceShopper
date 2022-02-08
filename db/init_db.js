@@ -33,11 +33,11 @@ async function buildTables() {
     await client.query(`
     CREATE TABLE users(
       id SERIAL PRIMARY KEY,
-      username TEXT UNIQUE NOT NULL,
-      password TEXT UNIQUE NOT NULL,
-      firstName TEXT NOT NULL,
-      lastName TEXT NOT NULL,
-      email TEXT UNIQUE NOT NULL,
+      username VARCHAR(255) UNIQUE NOT NULL,
+      password VARCHAR(255) UNIQUE NOT NULL,
+      firstName VARCHAR(255) NOT NULL,
+      lastName VARCHAR(255) NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
       imageURL TEXT,
       "isAdmin" BOOLEAN DEFAULT false NOT NULL
     );
