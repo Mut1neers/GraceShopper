@@ -4,7 +4,7 @@ import { ShoppingCart } from '@material-ui/icons';
 import useStyles from './navbarStyles';
 // import { mergeClasses } from '@material-ui/styles';
 
-//Will import logo for App from Assets
+import logo from '../assets/logo.png'
 
 const NavBar = () => {
     const classes = useStyles();
@@ -12,8 +12,8 @@ const NavBar = () => {
        <>
             <AppBar position='fixed' className={classes.appbar} color='inherit'>
                 <Toolbar>
-                    <Typography variatnt='h5' className={classes.title} color='inherit'>
-                        {/* <img src={} atl='rightClicked' height='25px' className={classes.image}/> */}
+                    <Typography variatnt='h6' className={classes.title} color='inherit'>
+                        <img src={logo} atl='rightClicked' height='45px' className={classes.image}/>
                         <h1>rightClicked Marketplace</h1>
                     </Typography>
                     <div className={classes.grow} />
