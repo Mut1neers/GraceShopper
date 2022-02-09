@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import {callApi} from '../api'
 
-import { Products, NavBar } from './';
+import { Site, NavBar } from './';
 
 
 // getAPIHealth is defined in our axios-services directory index.js
@@ -27,10 +28,35 @@ const App = () => {
     getAPIStatus();
   }, []);
 
+  const [products, setProducts] = useState({})
+
+
+  const fetchProducts = async () => {
+    const productsList = await callApi({
+     url: '/products',
+    });
+    
+    return productsList
+  }
+
+  useEffect(async () => {
+    
+   
+    const allProducts = await fetchProducts()
+    console.log('all Products', allProducts)
+    setProducts(allProducts)
+    
+
+    
+
+  }, [])
+
   return (
     <div className="app-container">
       <NavBar />
-      <Products />
+      <Site 
+        products={products}
+      />
       
       <p>API Status: {APIHealth}</p>
     </div>

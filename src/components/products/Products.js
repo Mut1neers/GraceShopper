@@ -1,16 +1,13 @@
 import React from 'react';
 import { Grid }  from '@material-ui/core';
-import { SingleProduct } from './';
+import { SingleProduct } from '..';
 
 
 
 
 
- const Products = () => {
-    const products = [
-        { id: 1, name: 'Ape NFT', description: 'Fake Ape NFT', price: '$5' },
-        { id: 2, name: 'Glitter Sparkle Bomb NFT', description: 'Fake special made glitter bomb NFT ', price: '10$'},
-      ];
+ const Products = ({products}) => {
+    
   return ( 
    <main>
         
@@ -18,8 +15,8 @@ import { SingleProduct } from './';
             {products.map((product) => {
                 return (
                     <SingleProduct 
-                    key={product.id}
-                    product={product}
+                        key={product.id}
+                        product={product}
                     />
                 )
             })}

@@ -9,6 +9,7 @@ productsRouter.use((req, res, next) =>{console.log("request being made /products
 
 productsRouter.get("/", async (req, res, next) => {
     try { const products = await getAllProducts()
+        console.log(products)
         res.send(products)
 
     }
