@@ -2,7 +2,7 @@ const client = require('./client');
 const bcrypt = require('bcrypt');
 const { rebuildDB } = require('./init_db');
 const { getAllOrders, createOrder, getOrdersByUser } = require('./models/orders');
-const { createUser, getUserById, getUser } = require('./models/user');
+const { createUser, getUserById, getUser, getUserByUsername } = require('./models/user');
 const { getAllProducts, createProduct, getProductById } = require('./models/products');
 
 describe('Database', () => {
@@ -67,6 +67,13 @@ describe('Database', () => {
         expect(user.id).toBe(userToCreateAndUpdate.id);
       });
     });
+    describe('getUserByUsername', () => {
+      it('Gets a user based on the username', async () => {
+        const user = await getUserByUsername(userToCreateAndUpdate.username);
+        expect(user).toBeTruthy();
+        expect(user.username).toBe(userToCreateAndUpdate.username);
+      });
+    });
   });
   describe('Products', () => {
     let productToCreateAndUpdate, queriedProduct;
@@ -116,7 +123,7 @@ describe('Database', () => {
         expect(createdOrder.status).toBe(orderToCreate.status);
       });
     });
-    describe('getOrdersByUser', () => {
+    xdescribe('getOrdersByUser', () => {
       let order, user;
       beforeAll(async () => {
         user = await getUserById(1);
@@ -133,7 +140,7 @@ describe('Database', () => {
         );
       });
     });
-    describe('getOrdersByProduct', () => {
+    xdescribe('getOrdersByProduct', () => {
       it(
         'selects and returns an array of orders which have a specific productId in their order_products join, include their products'
       );
