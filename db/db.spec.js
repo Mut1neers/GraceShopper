@@ -116,11 +116,12 @@ describe('Database', () => {
     });
     describe('createOrder', () => {
       it('Creates and returns the new order', async () => {
-        const orderToCreate = { id: 2, status: 'created', userId: 1 };
+        const orderToCreate = { id: 2, status: 'created', userId: 1, datePlaced: new Date() };
         const createdOrder = await createOrder(orderToCreate);
         expect(createdOrder.id).toBe(orderToCreate.id);
         expect(createdOrder.userId).toBe(orderToCreate.userId);
         expect(createdOrder.status).toBe(orderToCreate.status);
+        expect.any(Date);
       });
     });
     xdescribe('getOrdersByUser', () => {

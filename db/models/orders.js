@@ -85,6 +85,7 @@ async function getOrdersByProduct({ id }) {
       `,
       [product.id]
     );
+    console.log('ORDERS: ', orders);
     return orders;
   } catch (error) {
     throw error;
@@ -110,4 +111,11 @@ async function getCartByUser({ id }) {
     throw error;
   }
 }
-module.exports = { createOrder, getAllOrders, getOrdersByUser, getCartByUser, getOrdersByProduct };
+module.exports = {
+  createOrder,
+  getAllOrders,
+  getOrdersByUser,
+  getCartByUser,
+  getOrdersByProduct,
+  getOrderById,
+};
