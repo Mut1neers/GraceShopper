@@ -1,0 +1,37 @@
+const express = require('express');
+const { getAllOrders, createOrder } = require('../db/models/orders');
+const ordersRouter = express.Router();
+
+ordersRouter.get('/', async (req, res, next) => {
+  try {
+    const orders = await getAllOrders();
+    res.send(orders);
+    console.log('ORDERS: ', orders);
+  } catch (error) {
+    next(error);
+  }
+});
+
+ordersRouter.post('/', async (req, res, next) => {
+  const { status, userId, datePlaced } = req.body;
+  // const userId = req.user.id;
+  try {
+    const createdOrder = await createOrder({
+      status: status,
+      userId: userId,
+      datePlaced: datePlaced,
+    });
+    if (createdOrder) {
+      res.send(createdOrder);
+    } else {
+      next({
+        name: 'FailedToCreateOrder',
+        message: 'Error creating order!',
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+module.exports = ordersRouter;

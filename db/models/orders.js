@@ -110,4 +110,4 @@ async function getCartByUser({ id }) {
     throw error;
   }
 }
-module.exports = { createOrder, getAllOrders, getOrdersByUser };
+module.exports = { createOrder, getAllOrders, getOrdersByUser, getCartByUser, getOrdersByProduct };

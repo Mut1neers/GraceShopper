@@ -1,8 +1,7 @@
-const express = require("express");
+const express = require('express');
 const apiRouter = express.Router();
 
-
-apiRouter.get("/health", (req, res, next) => {
+apiRouter.get('/health', (req, res, next) => {
   res.send({
     healthy: true,
   });
@@ -14,7 +13,6 @@ apiRouter.get("/health", (req, res, next) => {
 //apiRouter.get("/orders")
 //apiRouter.get("/orders")
 
-
-apiRouter.use("/products", require("./products"));
-
+apiRouter.use('/products', require('./products'));
+apiRouter.use('/orders', require('./orders'));
 module.exports = apiRouter;
