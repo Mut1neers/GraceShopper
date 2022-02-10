@@ -3,7 +3,6 @@ const client = require('../client');
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
-// user functions
 async function createUser({ firstName, lastName, email, imageURL, username, password, isAdmin }) {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
@@ -45,7 +44,6 @@ async function getUser({ username, password }) {
 }
 
 async function getAllUsers() {
-  /* this adapter should fetch a list of users from your db */
   try {
     const { rows } = await client.query(`
     SELECT *
@@ -59,7 +57,6 @@ async function getAllUsers() {
 }
 
 async function getUserById(userId) {
-  // first get the user
   try {
     const {
       rows: [user],
@@ -71,10 +68,7 @@ async function getUserById(userId) {
     `,
       [userId]
     );
-    // if it doesn't exist, return null
     if (!user) return null;
-    // if it does:
-    // delete the 'password' key from the returned object
     delete user.password;
     return user;
   } catch (error) {
@@ -82,7 +76,6 @@ async function getUserById(userId) {
   }
 }
 async function getUserByUsername(userName) {
-  // first get the user
   try {
     const { rows } = await client.query(
       `
@@ -92,10 +85,7 @@ async function getUserByUsername(userName) {
     `,
       [userName]
     );
-    // if it doesn't exist, return null
     if (!rows || !rows.length) return null;
-    // if it does:
-    // delete the 'password' key from the returned object
     const [user] = rows;
     // delete user.password;
     return user;

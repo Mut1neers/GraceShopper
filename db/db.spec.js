@@ -1,9 +1,17 @@
 const client = require('./client');
 const bcrypt = require('bcrypt');
 const { rebuildDB } = require('./init_db');
-const { getAllOrders, createOrder, getOrdersByUser } = require('./models/orders');
+const {
+  getAllOrders,
+  createOrder,
+  getOrdersByUser,
+  getOrderById,
+  getOrdersByProduct,
+  getCartByUser,
+} = require('./models/orders');
 const { createUser, getUserById, getUser, getUserByUsername } = require('./models/user');
 const { getAllProducts, createProduct, getProductById } = require('./models/products');
+const { addProductToOrder, updateOrderProduct, destroyOrderProduct } = require('./models/order_products');
 
 describe('Database', () => {
   beforeAll(async () => {
@@ -124,7 +132,7 @@ describe('Database', () => {
         expect.any(Date);
       });
     });
-    xdescribe('getOrdersByUser', () => {
+    describe('getOrdersByUser', () => {
       let order, user;
       beforeAll(async () => {
         user = await getUserById(1);
@@ -135,16 +143,93 @@ describe('Database', () => {
           expect.objectContaining({
             id: expect.any(Number),
             status: expect.any(String),
-            productId: expect.any(Number),
+            userId: expect.any(Number),
             datePlaced: expect.any(Date),
           })
         );
       });
     });
-    xdescribe('getOrdersByProduct', () => {
-      it(
-        'selects and returns an array of orders which have a specific productId in their order_products join, include their products'
-      );
+    describe('getOrdersByProduct', () => {
+      let order, product;
+      beforeAll(async () => {
+        product = await getProductById(1);
+        [order] = await getOrdersByProduct(product);
+      });
+      it('selects and returns an array of products which have a specific productId in their order_products join, includes their products', async () => {
+        expect(order).toEqual(
+          expect.objectContaining({
+            id: expect.any(Number),
+            userId: expect.any(Number),
+            status: expect.any(String),
+            datePlaced: expect.any(Date),
+            products: expect.any(Array),
+          })
+        );
+      });
+      it('includes username, from users join, aliased as customerName', async () => {
+        expect(order).toEqual(
+          expect.objectContaining({
+            customerName: expect.any(String),
+          })
+        );
+      });
+    });
+    describe('getCartByUser', () => {
+      let order, user;
+      beforeAll(async () => {
+        user = await getUserById(1);
+        [order] = await getCartByUser(user.id);
+      });
+      it("selects one user's order that has an order.status = created, returns the order, include the order's products", async () => {
+        expect(order).toEqual(
+          expect.objectContaining({
+            id: expect.any(Number),
+            userId: expect.any(Number),
+            status: expect.any(String),
+            datePlaced: expect.any(Date),
+            // products: expect.any(Array),
+          })
+        );
+      });
+    });
+  });
+  describe('Order Products', () => {
+    const orderProductData = {
+      productId: 2,
+      orderId: 2,
+      price: '1234.00',
+      quantity: 1,
+    };
+    let orderProductToCreateAndUpdate;
+    describe('addProductToOrder', () => {
+      it('creates a new order_product and returns it', async () => {
+        orderProductToCreateAndUpdate = await addProductToOrder(orderProductData);
+
+        expect(orderProductToCreateAndUpdate.productId).toBe(orderProductData.productId);
+        expect(orderProductToCreateAndUpdate.orderId).toBe(orderProductData.orderId);
+        expect(orderProductToCreateAndUpdate.price).toBe(orderProductData.price);
+        expect(orderProductToCreateAndUpdate.quantity).toBe(orderProductData.quantity);
+      });
+    });
+    describe('updateOrderProduct', () => {
+      it('Finds the order with id equal to the passed in id. Updates the price or quantity', async () => {
+        const newOrderProductData = { id: orderProductToCreateAndUpdate.id, price: '4321.00', quantity: 3 };
+        orderProductToCreateAndUpdate = await updateOrderProduct(newOrderProductData);
+        expect(orderProductToCreateAndUpdate.id).toBe(newOrderProductData.id);
+        expect(orderProductToCreateAndUpdate.price).toBe(newOrderProductData.price);
+        expect(orderProductToCreateAndUpdate.quantity).toBe(newOrderProductData.quantity);
+      });
+    });
+    describe('destroyOrderProduct', () => {
+      it('removes order_product from database', async () => {
+        const deletedOrderProduct = await destroyOrderProduct(orderProductToCreateAndUpdate.id);
+        expect(deletedOrderProduct.id).toBe(orderProductToCreateAndUpdate.id);
+        const { rows } = await client.query(`
+        SELECT * FROM order_products
+        WHERE id = ${deletedOrderProduct.id}
+        `);
+        expect(rows.length).toBe(0);
+      });
     });
   });
 });

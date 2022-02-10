@@ -27,7 +27,19 @@ function requireUser(req, res, next) {
   next();
 }
 
+function requireAdmin(req, res, next) {
+  if (!req.user.isAdmin) {
+    next({
+      name: 'MissingAdminError',
+      message: 'You must be an Admin in to perform this action',
+    });
+  }
+
+  next();
+}
+
 module.exports = {
   dbFields,
   requireUser,
+  requireAdmin,
 };

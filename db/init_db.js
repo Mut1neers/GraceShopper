@@ -5,9 +5,10 @@ const {
 } = require('./models/user');
 
 const { createProduct, getAllProducts, getProductById } = require('./models/products');
-const { createOrder } = require('./models/orders');
+const { createOrder, getAllOrders } = require('./models/orders');
 
 const client = require('./client');
+const { addProductToOrder } = require('./models/order_products');
 
 async function dropTables() {
   console.log('Dropping all tables...');
@@ -38,18 +39,18 @@ async function buildTables() {
       firstName VARCHAR(255) NOT NULL,
       lastName VARCHAR(255) NOT NULL,
       email VARCHAR(255) UNIQUE NOT NULL,
-      imageURL TEXT,
+      imageURL VARCHAR(255),
       "isAdmin" BOOLEAN DEFAULT false NOT NULL
     );
 
     CREATE TABLE products(
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) UNIQUE NOT NULL,
-      description TEXT NOT NULL,
+      description VARCHAR(255) NOT NULL,
       price DECIMAL(10, 2) NOT NULL,
-      imageURL TEXT,
+      imageURL VARCHAR(255),
       "inStock" BOOLEAN DEFAULT false,
-      category TEXT NOT NULL
+      category VARCHAR(255) NOT NULL
     );
     
     CREATE TABLE orders(
@@ -64,7 +65,8 @@ async function buildTables() {
       "productId" INTEGER REFERENCES products(id),
       "orderId" INTEGER REFERENCES orders(id),
       price DECIMAL(10, 2) NOT NULL,
-      quantity INTEGER NOT NULL DEFAULT 0
+      quantity INTEGER NOT NULL DEFAULT 0,
+      UNIQUE ("orderId", "productId")
       );
     `);
 
@@ -121,6 +123,19 @@ async function populateInitialData() {
     const orders = await Promise.all(ordersToCreate.map(createOrder));
     console.log('Orders created:');
     console.log(orders);
+
+    console.log('Starting to create orderProducts...');
+    const orderProductsToCreate = [
+      {
+        productId: 1,
+        orderId: 1,
+        price: 5000,
+        quantity: 1,
+      },
+    ];
+    const orderProducts = await Promise.all(orderProductsToCreate.map(addProductToOrder));
+    console.log('order_products created: ', orderProducts);
+    console.log('Finished creating order_products!');
   } catch (error) {
     console.error('Error populating initial data!');
     throw error;

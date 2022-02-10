@@ -50,8 +50,26 @@ async function getProductById(productId) {
     throw error;
   }
 }
+
+async function getProductsByOrderId(id) {
+  try {
+    const { rows: products } = await client.query(
+      `
+      SELECT products.*, order_products.quantity, order_products.id AS "orderProductId"
+      FROM products
+      JOIN order_products ON order_products."productId" = products.id
+      WHERE order_products."orderId" = $1;
+      `,
+      [id]
+    );
+    return products;
+  } catch (error) {
+    throw error;
+  }
+}
 module.exports = {
   createProduct,
   getAllProducts,
   getProductById,
+  getProductsByOrderId,
 };

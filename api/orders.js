@@ -21,13 +21,14 @@ ordersRouter.get('/', async (req, res, next) => {
 ordersRouter.get('/cart', requireUser, async (req, res, next) => {
   const userCart = await getCartByUser(req.user);
   try {
-    if (userCart.status === 'created') {
+    if (userCart && userCart.status === 'created') {
       res.send(userCart);
     }
   } catch (error) {
     next(error);
   }
 });
+
 ordersRouter.post('/', requireUser, async (req, res, next) => {
   const { status, userId, datePlaced } = req.body;
   //   const userId = req.user.id;
