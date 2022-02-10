@@ -1,37 +1,82 @@
 import React, { useState, useEffect } from 'react';
-
-import { Products, NavBar } from './';
-
-
-// getAPIHealth is defined in our axios-services directory index.js
-// you can think of that directory as a collection of api adapters
-// where each adapter fetches specific info from our express server's /api route
+import { Route, Switch } from 'react-router-dom';
+import { Products, NavBar, AccountForm } from './';
+import { callApi } from '../api';
 import { getAPIHealth } from '../axios-services';
 import '../style/App.css';
 
-
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
-  
+  const [token, setToken] = useState('');
+  const [orders, setOrders] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [userData, setUserData] = useState({});
+
+  const fetchUserData = async (token) => {
+    const data = await callApi({
+      url: '/users/me',
+      token,
+    });
+    console.log('USERDATA: ', data);
+    return data;
+  };
+
+  const fetchOrders = async () => {
+    const orders = await callApi({ url: '/orders' });
+    console.log('orders: ', orders);
+    return orders;
+  };
+  const fetchProducts = async () => {
+    const products = await callApi({ url: '/products' });
+    console.log('products: ', products);
+    return products;
+  };
+
   useEffect(() => {
-    // follow this pattern inside your useEffect calls:
-    // first, create an async function that will wrap your axios service adapter
-    // invoke the adapter, await the response, and set the data
+    const fetchData = async () => {
+      const orders = await fetchOrders();
+      setOrders(orders);
+      const products = await fetchProducts();
+      setProducts(products);
+      if (!token) {
+        setToken(localStorage.getItem('token'));
+        return;
+      }
+      const data = await fetchUserData(token);
+      if (data) {
+        setUserData(data);
+      }
+    };
+    fetchData();
     const getAPIStatus = async () => {
       const { healthy } = await getAPIHealth();
       setAPIHealth(healthy ? 'api is actually freaking working! :D' : 'api is down :/');
     };
-
-    // second, after you've defined your getter above
-    // invoke it immediately after its declaration, inside the useEffect callback
     getAPIStatus();
-  }, []);
+  }, [token]);
 
   return (
-    <div className="app-container">
+    <div className='app-container'>
       <NavBar />
-      <Products />
-      
+      <Switch>
+        <Route exact path='/products'>
+          <Products products={products} />
+        </Route>
+        <Route path='/register'>
+          <AccountForm action='register' setToken={setToken} setUserData={setUserData} />
+        </Route>
+        <Route path='/login'>
+          {!token ? (
+            <AccountForm action='login' setToken={setToken} setUserData={setUserData} />
+          ) : (
+            <>
+              <div>You are already logged in!</div>
+              <br />
+            </>
+          )}
+        </Route>
+      </Switch>
+
       <p>API Status: {APIHealth}</p>
     </div>
   );

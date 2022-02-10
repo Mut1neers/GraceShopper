@@ -1,20 +1,20 @@
 import React from 'react';
-import { Grid }  from '@material-ui/core';
-import { SingleProduct } from './';
+// import { Grid }  from '@material-ui/core';
+// import { SingleProduct } from './';
 
-
-
-
-
- const Products = () => {
-    const products = [
-        { id: 1, name: 'Ape NFT', description: 'Fake Ape NFT', price: '$5' },
-        { id: 2, name: 'Glitter Sparkle Bomb NFT', description: 'Fake special made glitter bomb NFT ', price: '10$'},
-      ];
-  return ( 
-   <main>
-        
-        <Grid container justify='center' spacing={4}>
+const Products = ({ products }) => {
+  //   const products = [
+  //     { id: 1, name: 'Ape NFT', description: 'Fake Ape NFT', price: '$5' },
+  //     {
+  //       id: 2,
+  //       name: 'Glitter Sparkle Bomb NFT',
+  //       description: 'Fake special made glitter bomb NFT ',
+  //       price: '10$',
+  //     },
+  //   ];
+  return (
+    <>
+      {/* <Grid container justify='center' spacing={4}>
             {products.map((product) => {
                 return (
                     <SingleProduct 
@@ -23,9 +23,9 @@ import { SingleProduct } from './';
                     />
                 )
             })}
-        </Grid>
-    </main>
-  )
-}
+        </Grid> */}
+    </>
+  );
+};
 
-export default Products
+export default Products;
