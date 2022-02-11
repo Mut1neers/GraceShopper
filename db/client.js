@@ -13,8 +13,11 @@ const DB_NAME = 'rightClicked-dev';
 
 const client = new Client({
   connectionString:
-    'postgres://faevujzbxrknvj:e3befa882a3f0d2ef602a8160a7ad5dbcc414ad3bf146cb2acaa8f19e3c4791f@ec2-3-212-143-188.compute-1.amazonaws.com:5432/d7rqghoakrd3c8',
-  ssl: true,
+    process.env.DATABASE_URL || `postgres://localhost:5432/${DB_NAME}`,
+  ssl:
+    process.env.NODE_ENV === 'production'
+      ? { rejectUnauthorized: false }
+      : undefined,
 });
 
 module.exports = client;
