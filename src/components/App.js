@@ -59,30 +59,7 @@ const App = () => {
     };
     getAPIStatus();
   }, [token]);
-
- 
-
-
-  const fetchProducts = async () => {
-    const productsList = await callApi({
-     url: '/products',
-    });
-    
-    return productsList
-  }
-
-  useEffect(async () => {
-    
-   
-    const allProducts = await fetchProducts()
-    console.log('all Products', allProducts)
-    setProducts(allProducts)
-    
-
-    
-
-  }, [])
-
+  
   return (
     <div className='app-container'>
       <NavBar />
@@ -94,5 +71,6 @@ const App = () => {
     </div>
   );
 };
+
 
 export default App;
