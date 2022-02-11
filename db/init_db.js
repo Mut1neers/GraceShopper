@@ -4,7 +4,11 @@ const {
   createUser,
 } = require('./models/user');
 
-const { createProduct, getAllProducts, getProductById } = require('./models/products');
+const {
+  createProduct,
+  getAllProducts,
+  getProductById,
+} = require('./models/products');
 const { createOrder, getAllOrders } = require('./models/orders');
 
 const client = require('./client');
@@ -52,14 +56,14 @@ async function buildTables() {
       "inStock" BOOLEAN DEFAULT false,
       category VARCHAR(255) NOT NULL
     );
-    
+
     CREATE TABLE orders(
       id SERIAL PRIMARY KEY,
       status VARCHAR(255) DEFAULT 'created',
       "userId" INTEGER REFERENCES users(id),
       "datePlaced" DATE
       );
-      
+
     CREATE TABLE order_products(
       id SERIAL PRIMARY KEY,
       "productId" INTEGER REFERENCES products(id),
@@ -133,7 +137,9 @@ async function populateInitialData() {
         quantity: 1,
       },
     ];
-    const orderProducts = await Promise.all(orderProductsToCreate.map(addProductToOrder));
+    const orderProducts = await Promise.all(
+      orderProductsToCreate.map(addProductToOrder)
+    );
     console.log('order_products created: ', orderProducts);
     console.log('Finished creating order_products!');
   } catch (error) {
@@ -142,7 +148,7 @@ async function populateInitialData() {
   }
 }
 
-async function rebuildDB() {
+const rebuildDB = async () => {
   try {
     client.connect();
     await dropTables();
@@ -152,8 +158,10 @@ async function rebuildDB() {
     console.log('Error during rebuildDB');
     throw error;
   }
-}
-
-module.exports = {
-  rebuildDB,
 };
+
+rebuildDB()
+  .catch(console.error)
+  .finally(() => client.end());
+
+module.exports = { rebuildDB };
