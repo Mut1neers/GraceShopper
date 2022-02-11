@@ -1,9 +1,4 @@
 import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD
-import { Route, Switch } from 'react-router-dom';
-import { Products, NavBar, AccountForm } from './';
-import { callApi } from '../api';
-=======
 import {callApi} from '../api'
 
 import { Site, NavBar } from './';
@@ -12,7 +7,6 @@ import { Site, NavBar } from './';
 // getAPIHealth is defined in our axios-services directory index.js
 // you can think of that directory as a collection of api adapters
 // where each adapter fetches specific info from our express server's /api route
->>>>>>> main
 import { getAPIHealth } from '../axios-services';
 import '../style/App.css';
 
@@ -92,32 +86,10 @@ const App = () => {
   return (
     <div className='app-container'>
       <NavBar />
-<<<<<<< HEAD
-      <Switch>
-        <Route exact path='/products'>
-          <Products products={products} />
-        </Route>
-        <Route path='/register'>
-          <AccountForm action='register' setToken={setToken} setUserData={setUserData} />
-        </Route>
-        <Route path='/login'>
-          {!token ? (
-            <AccountForm action='login' setToken={setToken} setUserData={setUserData} />
-          ) : (
-            <>
-              <div>You are already logged in!</div>
-              <br />
-            </>
-          )}
-        </Route>
-      </Switch>
-
-=======
       <Site 
         products={products}
       />
       
->>>>>>> main
       <p>API Status: {APIHealth}</p>
     </div>
   );
