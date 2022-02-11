@@ -6,7 +6,7 @@ import {
     useParams,
     BrowserRouter
   } from "react-router-dom";
-  import {Products, SingleProduct} from './'
+  import {Products, SingleProduct, AccountForm} from './'
 
 
 const Site = ({products}) => {
@@ -14,6 +14,7 @@ const Site = ({products}) => {
         <BrowserRouter>
             <Route exact path="/">
                 <div>Hello World</div>
+                <AccountForm />
             </Route>
             <Route exact path="/products">
                 <Products 
