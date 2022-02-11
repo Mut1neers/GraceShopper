@@ -7,3 +7,5 @@ export { default as Products } from './products/Products';
 export { default as NavBar } from './navbar/NavBar';
 
 export { default as Site } from './site';
+
+export { default as AccountForm } from './AccountForm'

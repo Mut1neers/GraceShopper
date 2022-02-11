@@ -32,7 +32,7 @@ const AccountForm = ({ action, setToken }) => {
 
   return (
     <>
-      <Container style={{ padding: '1px' }}>
+      <Container style={{ padding: '120px' }}>
         <h2>{title}</h2>
         <form onSubmit={handleSubmit}>
           <input
