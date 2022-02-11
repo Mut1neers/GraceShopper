@@ -60,7 +60,7 @@ const App = () => {
     getAPIStatus();
   }, [token]);
 
-  const [products, setProducts] = useState({})
+ 
 
 
   const fetchProducts = async () => {
