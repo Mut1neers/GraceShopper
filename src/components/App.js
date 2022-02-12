@@ -67,6 +67,8 @@ const App = () => {
       <Site 
         products={products}
         setToken={setToken}
+        userData={userData}
+        token={token}
       />
       
       <p>API Status: {APIHealth}</p>

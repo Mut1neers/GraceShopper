@@ -6,10 +6,10 @@ import {
     useParams,
     BrowserRouter
   } from "react-router-dom";
-  import {Products, SingleProduct, AccountForm} from './'
+  import {Products, SingleProduct, AccountForm, UserProfile} from './'
 
 
-const Site = ({products, setToken}) => {
+const Site = ({products, setToken, userData, token}) => {
     return (
         <BrowserRouter>
             <Route exact path="/">
@@ -29,7 +29,7 @@ const Site = ({products, setToken}) => {
             </Route>
             <Route exact path="/login">
                 <AccountForm
-                    action={'login'}
+                    action='login'
                     setToken={setToken}
                 />
             </Route>
@@ -37,6 +37,12 @@ const Site = ({products, setToken}) => {
                 <AccountForm
                     action='register'
                     setToken={setToken}
+                />
+            </Route>
+            <Route exact path="/user/:userId">
+                <UserProfile
+                    userData={userData}
+                    token={token}
                 />
             </Route>
 
