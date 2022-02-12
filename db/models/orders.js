@@ -193,6 +193,43 @@ async function destroyOrder(id) {
   }
 }
 
+async function completeOrder({ id }) {
+  try {
+    const {
+      rows: [order],
+    } = await client.query(
+      `
+      UPDATE orders
+      SET order.status = 'completed'
+      WHERE id = $1
+      RETURNING *;
+      `,
+      [id]
+    );
+    return order;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function cancelOrder(id) {
+  try {
+    const {
+      rows: [order],
+    } = await client.query(
+      `
+      UPDATE orders
+      SET order.status = 'cancelled'
+      WHERE id = $1
+      RETURNING *;
+      `,
+      [id]
+    );
+    return order;
+  } catch (error) {
+    throw error;
+  }
+}
 module.exports = {
   createOrder,
   getAllOrders,
@@ -202,4 +239,6 @@ module.exports = {
   getOrderById,
   updateOrder,
   destroyOrder,
+  cancelOrder,
+  completeOrder,
 };
