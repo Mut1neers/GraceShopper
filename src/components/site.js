@@ -9,12 +9,13 @@ import {
   import {Products, SingleProduct, AccountForm} from './'
 
 
-const Site = ({products}) => {
+const Site = ({products, setToken}) => {
     return (
         <BrowserRouter>
             <Route exact path="/">
-                <div>Hello World</div>
-                <AccountForm />
+            <Products 
+                    products={products}
+                />
             </Route>
             <Route exact path="/products">
                 <Products 
@@ -26,6 +27,19 @@ const Site = ({products}) => {
                     products={products}
                 />
             </Route>
+            <Route exact path="/login">
+                <AccountForm
+                    action={'login'}
+                    setToken={setToken}
+                />
+            </Route>
+            <Route exact path="/register">
+                <AccountForm
+                    action='register'
+                    setToken={setToken}
+                />
+            </Route>
+
             
 
         

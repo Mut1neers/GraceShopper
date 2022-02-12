@@ -49,12 +49,7 @@ apiRouter.use(async (req, res, next) => {
   }
 });
 
-apiRouter.use((req, res, next) => {
-  // console.log('REQ.USER: ', req.user);
-  if (req.user) {
-  }
-  next();
-});
+
 
 // place your routers here
 
@@ -62,6 +57,8 @@ apiRouter.use((req, res, next) => {
 //apiRouter.get("/orders")
 //apiRouter.get("/orders")
 
+
+apiRouter.use('/users', require('./users'));
 apiRouter.use('/products', require('./products'));
 apiRouter.use('/orders', require('./orders'));
 module.exports = apiRouter;

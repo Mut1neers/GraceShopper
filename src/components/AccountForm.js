@@ -13,6 +13,7 @@ const AccountForm = ({ action, setToken }) => {
   const history = useHistory();
 
   const handleSubmit = async (event) => {
+   
     event.preventDefault();
     const data = await callApi({
       url: `/users/${action}`,
