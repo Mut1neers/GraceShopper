@@ -63,6 +63,7 @@ apiRouter.use((req, res, next) => {
 //apiRouter.get("/orders")
 apiRouter.use('/users', require('./users'));
 
+apiRouter.use('/users', require('./users'));
 apiRouter.use('/products', require('./products'));
 apiRouter.use('/orders', require('./orders'));
 module.exports = apiRouter;
