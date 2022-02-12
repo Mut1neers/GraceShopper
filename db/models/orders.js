@@ -200,7 +200,7 @@ async function completeOrder({ id }) {
     } = await client.query(
       `
       UPDATE orders
-      SET order.status = 'completed'
+      SET status = 'completed'
       WHERE id = $1
       RETURNING *;
       `,
@@ -219,7 +219,7 @@ async function cancelOrder(id) {
     } = await client.query(
       `
       UPDATE orders
-      SET order.status = 'cancelled'
+      SET status = 'cancelled'
       WHERE id = $1
       RETURNING *;
       `,
