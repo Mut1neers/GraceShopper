@@ -14,7 +14,9 @@ const Site = ({products}) => {
         <BrowserRouter>
             <Route exact path="/">
                 <div>Hello World</div>
-                <AccountForm />
+                <AccountForm 
+                    action
+                />
             </Route>
             <Route exact path="/products">
                 <Products 

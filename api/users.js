@@ -11,7 +11,7 @@ usersRouter.use((req, res, next) => {
 });
 
 usersRouter.get('/', async (req, res) => {
-  const { users } = await getAllUsers();
+  const users = await getAllUsers();
   console.log('USERS: ', users);
   res.send(users);
 });
@@ -108,3 +108,5 @@ usersRouter.get('/me', requireUser, async (req, res, next) => {
     });
   }
 });
+
+module.exports = usersRouter
