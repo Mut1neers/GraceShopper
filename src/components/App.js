@@ -66,6 +66,7 @@ const App = () => {
       <NavBar />
       <Site 
         products={products}
+        setToken={setToken}
       />
       
       <p>API Status: {APIHealth}</p>

@@ -56,7 +56,7 @@ apiRouter.use(async (req, res, next) => {
 //apiRouter.get("/users")
 //apiRouter.get("/orders")
 //apiRouter.get("/orders")
-apiRouter.use('/users', require('./users'));
+
 
 apiRouter.use('/users', require('./users'));
 apiRouter.use('/products', require('./products'));
