@@ -6,7 +6,11 @@ import {
     useParams,
     BrowserRouter
   } from "react-router-dom";
+<<<<<<< HEAD
+  import {Products, SingleProduct, AccountForm, SingleProductPage} from './'
+=======
   import {Products, SingleProduct, AccountForm, Home } from './'
+>>>>>>> main
 
 
 const Site = ({products, setToken}) => {
@@ -21,7 +25,7 @@ const Site = ({products, setToken}) => {
                 />
             </Route>
             <Route exact path="/products/:productId">
-                <SingleProduct 
+                <SingleProductPage 
                     products={products}
                 />
             </Route>

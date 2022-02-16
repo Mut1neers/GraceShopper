@@ -8,6 +8,9 @@ export { default as NavBar } from './navbar/NavBar';
 
 export { default as Site } from './site';
 
-export { default as AccountForm } from './AccountForm';
+export { default as AccountForm } from './AccountForm'
+
+export { default as SingleProductPage } from './products/SingleProductPage'
+
 
 export { default as Home } from './Home';
