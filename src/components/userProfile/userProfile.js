@@ -1,16 +1,24 @@
 import React from 'react'
-import { useParams, Link, useHistory } from "react-router-dom";
-import { callApi } from "../../api";
+import { useParams } from "react-router-dom";
 
-const UserProfile = ({userData, token}) => {
 
-    const History = useHistory()
-    const { userId } = useParams();
-    const isUser = userData.username === token.username
+
+const UserProfile = ({userData, token, users}) => {
+
+    let { userId } = useParams()
+    const user = users.find((user) => parseInt(userId) === user.id );
 
     return (
-        <h2>Hello {userData.username}</h2>
-    )
+     <div>
+         {user ? (
+             <h2> {user.username}</h2>
+         ) : (
+             <h2>User does not exist</h2>
+         )
+         }
+       
+     </div>
+    );
 
 }
 

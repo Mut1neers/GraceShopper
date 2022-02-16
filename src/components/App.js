@@ -16,7 +16,8 @@ const App = () => {
   const [token, setToken] = useState('');
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState([]);
+  const [users, setUsers] = useState([])
 
   const fetchUserData = async (token) => {
     const data = await callApi({
@@ -26,6 +27,14 @@ const App = () => {
     console.log('USERDATA: ', data);
     return data;
   };
+
+  const fetchUsers = async () => {
+    const users = await callApi({
+      url: '/users',
+    });
+    console.log('USERS DATA: ', users);
+    return users;
+  } 
 
   const fetchOrders = async () => {
     const orders = await callApi({ url: '/orders' });
@@ -48,6 +57,8 @@ const App = () => {
         setToken(localStorage.getItem('token'));
         return;
       }
+      const users = await fetchUsers()
+      setUsers(users)
       const data = await fetchUserData(token);
       if (data) {
         setUserData(data);
@@ -60,15 +71,18 @@ const App = () => {
     };
     getAPIStatus();
   }, [token]);
+
+  console.log("users", users)
   
   return (
     <div className='app-container'>
-      <NavBar />
+      {/* <NavBar /> */}
       <Site 
         products={products}
         setToken={setToken}
         userData={userData}
         token={token}
+        users={users}
       />
       
       <p>API Status: {APIHealth}</p>

@@ -6,12 +6,17 @@ import {
     useParams,
     BrowserRouter
   } from "react-router-dom";
-  import {Products, SingleProduct, AccountForm, UserProfile} from './'
+  import {Products, 
+    SingleProduct, 
+    AccountForm, 
+    UserProfile
+} from './'
 
 
-const Site = ({products, setToken, userData, token}) => {
+const Site = ({products, setToken, userData, token, users}) => {
     return (
         <BrowserRouter>
+        <Switch>
             <Route exact path="/">
             <Products 
                     products={products}
@@ -39,8 +44,12 @@ const Site = ({products, setToken, userData, token}) => {
                     setToken={setToken}
                 />
             </Route>
-            <Route exact path="/user/:userId">
+            <Route exact path='/users'>
+                <h2>All users</h2>
+            </Route>
+            <Route path="/users/:userId">
                 <UserProfile
+                    users={users}
                     userData={userData}
                     token={token}
                 />
@@ -51,7 +60,7 @@ const Site = ({products, setToken, userData, token}) => {
         
         
         
-        
+            </Switch>
         </BrowserRouter>
         
 
