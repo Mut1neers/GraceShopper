@@ -1,33 +1,60 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography } from '@material-ui/core';
-import { ShoppingCart } from '@material-ui/icons';
-import useStyles from './navbarStyles';
-import { mergeClasses } from '@material-ui/styles';
+import Home from '../Home';
+import AccountForm from '../AccountForm';
+import Products from '../products/Products';
+import './NavBar.css';
 
-// import logo from '../assets/logo.png'
+
+const MenuItems = [
+    {
+        title: 'Home',
+        url: <Home />,
+        class: 'nav-links'
+    },
+    {
+        title: 'Products List',
+        url: <Products />,
+        class: 'nav-links'
+    },
+    {
+        title: 'Register',
+        url: <AccountForm />,
+        class: 'nav-links'
+    },
+];
+
 
 const NavBar = () => {
-    const classes = useStyles();
-   return (
-       <>
-            <AppBar position='fixed' className={classes.appbar} color='inherit'>
-                <Toolbar>
-                    <Typography variatnt='h6' className={classes.title} color='inherit'>
-                       {/* // <img src={logo} atl='rightClicked' height='45px' className={classes.image}/> */}
-                        <h1>rightClicked Marketplace</h1>
-                    </Typography>
-                    <div className={classes.grow} />
-                    <div className={classes.button}>
-                        <IconButton aria-label='Show Cart Items' color='inherit'>
-                            <Badge badgeContent = {2} color='inherit'>
-                                <ShoppingCart />
-                            </Badge>
-                        </IconButton>
-                    </div>
-                </Toolbar>
-            </AppBar>
-       </>
-   ) 
-}
+
+   
+    return (
+     <>
+     <nav className='NavBarItems'>
+         <h1 className='navbar-logo'>RightClicked</h1>
+         <div className='menu-icon'>
+             
+             
+         </div>
+         <div className='search-bar'><input type='search' placeholder='Search Our Products Library'></input>
+         <span className='fa fa-search'></span>
+         </div>
+         <ul>
+             {MenuItems.map((item, index) => {
+                 return (
+                    <li key={index}>
+                        <a className={item.class} href={item.url} >
+                         {item.title}   
+                        </a>
+                    </li>
+                 )
+             })}
+            
+         </ul>
+     </nav>
+     </> 
+    )
+
+    }   
+
 
 export default NavBar;
