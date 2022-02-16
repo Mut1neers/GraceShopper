@@ -3,6 +3,7 @@ import Home from '../Home';
 import AccountForm from '../AccountForm';
 import Products from '../products/Products';
 import './NavBar.css';
+import { ShoppingCart } from '@material-ui/icons'
 
 
 const MenuItems = [
@@ -46,10 +47,12 @@ const NavBar = () => {
                          {item.title}   
                         </a>
                     </li>
+        
                  )
              })}
             
          </ul>
+         <ShoppingCart />
      </nav>
      </> 
     )

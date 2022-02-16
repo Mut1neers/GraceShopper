@@ -10,8 +10,7 @@ import { SingleProduct } from '..';
     
   return ( 
    <main>
-        
-        <Grid container justify='center' spacing={4}>
+      <Grid container justify='center' spacing={4}>
             {products.map((product) => {
                 return (
                     <SingleProduct 
@@ -21,8 +20,9 @@ import { SingleProduct } from '..';
                 )
             })}
         </Grid>
-    </main>
+         </main>
   )
-}
+}   
+
 
 export default Products
