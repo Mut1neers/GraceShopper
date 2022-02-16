@@ -1,5 +1,5 @@
-// export const API_URL = 'https://mutineers1.herokuapp.com/api';
-export const API_URL = '/api';
+export const API_URL = 'https://mutineers1.herokuapp.com/api';
+//export const API_URL = '/api';
 
 export const callApi = async ({ url, method, token, body }) => {
   //console.log('callApi: ', { url, method, token, body });
