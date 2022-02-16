@@ -12,7 +12,7 @@ orderProductsRouter.use((req, res, next) => {
   next();
 });
 
-orderProductsRouter.patch('/:orderProductId', requireUser, (req, res, next) => {
+orderProductsRouter.patch('/:orderProductId', requireUser, async (req, res, next) => {
   try {
     const orderProductToUpdate = await getOrderProductById(req.params.orderProductId);
     const orderProductId = req.params.orderProductId;
