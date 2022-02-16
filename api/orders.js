@@ -1,6 +1,6 @@
 const express = require('express');
 const { getAllOrders, createOrder, getCartByUser } = require('../db/models/orders');
-const { requireUser } = require('../db/util');
+const { requireUser, requireAdmin } = require('../db/util');
 const ordersRouter = express.Router();
 
 ordersRouter.use((req, res, next) => {
@@ -8,7 +8,7 @@ ordersRouter.use((req, res, next) => {
   next();
 });
 
-ordersRouter.get('/', async (req, res, next) => {
+ordersRouter.get('/', requireAdmin, async (req, res, next) => {
   try {
     const orders = await getAllOrders();
     res.send(orders);

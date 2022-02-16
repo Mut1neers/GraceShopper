@@ -3,6 +3,7 @@ const usersRouter = express.Router();
 const { requireUser } = require('../db/util');
 const { getAllUsers, getUser, createUser, getUserById } = require('../db/models/user');
 const jwt = require('jsonwebtoken');
+const { getOrdersByUser } = require('../db/models/orders');
 const { JWT_SECRET } = process.env;
 
 usersRouter.use((req, res, next) => {
@@ -112,6 +113,17 @@ usersRouter.get('/me', requireUser, async (req, res, next) => {
       name: 'UnauthorizedAccessError',
       message: 'User is not authorized',
     });
+  }
+});
+
+usersRouter.get('/:userId/orders', requireUser, async (req, res, next) => {
+  try {
+    const userId = req.params;
+    const orders = await getOrdersByUser(userId);
+    res.send(orders);
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 });
 
