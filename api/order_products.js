@@ -44,3 +44,5 @@ orderProductsRouter.delete('/:orderProductId', requireUser, async (req, res, nex
     throw error;
   }
 });
+
+module.exports = orderProductsRouter;
