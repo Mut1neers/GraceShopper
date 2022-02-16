@@ -25,13 +25,15 @@ apiRouter.use(async (req, res, next) => {
   const prefix = 'Bearer ';
   const auth = req.header('Authorization');
   if (!auth) {
+    console.log('NOT AUTHORIZED');
     next();
   } else if (auth.startsWith(prefix)) {
+    console.log('Authorized');
     const token = auth.slice(prefix.length);
 
     try {
       const parsedToken = jwt.verify(token, JWT_SECRET);
-
+      console.log('PARSED: ', parsedToken);
       const id = parsedToken && parsedToken.id;
       if (id) {
         req.user = await getUserById(parsedToken.id);
@@ -49,16 +51,14 @@ apiRouter.use(async (req, res, next) => {
   }
 });
 
-
-
 // place your routers here
 
 //apiRouter.get("/users")
 //apiRouter.get("/orders")
 //apiRouter.get("/orders")
 
-
 apiRouter.use('/users', require('./users'));
 apiRouter.use('/products', require('./products'));
 apiRouter.use('/orders', require('./orders'));
+apiRouter.use('/order_products', require('./order_products'));
 module.exports = apiRouter;
