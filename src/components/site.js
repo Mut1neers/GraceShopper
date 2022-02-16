@@ -9,7 +9,7 @@ import {
   import {Products, SingleProduct, AccountForm, SingleProductPage, Home, UserProfile } from './'
 
 
-const Site = ({products, setToken, userData, token}) => {
+const Site = ({products, setToken, userData, token, users}) => {
     return (
         <BrowserRouter>
             <Route exact path="/">
@@ -37,10 +37,11 @@ const Site = ({products, setToken, userData, token}) => {
                     setToken={setToken}
                 />
             </Route>
-            <Route exact path="/user/:userId">
+            <Route exact path="/users/:userId">
                 <UserProfile
                     userData={userData}
                     token={token}
+                    users={users}
                 />
             </Route>
 

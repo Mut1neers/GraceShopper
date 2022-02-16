@@ -12,6 +12,7 @@ const App = () => {
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState({});
+  const [users, setUsers] = useState([])
 
   const fetchUserData = async (token) => {
     const data = await callApi({
@@ -32,6 +33,11 @@ const App = () => {
     console.log('products: ', products);
     return products;
   };
+  const fetchUsers = async () => {
+    const users = await callApi({ url: '/users' });
+    console.log('users: ', users);
+    return users;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +45,8 @@ const App = () => {
       setOrders(orders);
       const products = await fetchProducts();
       setProducts(products);
+      const users = await fetchUsers();
+      setUsers(users);
       if (!token) {
         setToken(localStorage.getItem('token'));
         return;
@@ -64,6 +72,7 @@ const App = () => {
         setToken={setToken}
         userData={userData}
         token={token}
+        users={users}
       />
       
       <p>API Status: {APIHealth}</p>
