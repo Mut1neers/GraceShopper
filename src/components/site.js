@@ -6,11 +6,7 @@ import {
     useParams,
     BrowserRouter
   } from "react-router-dom";
-<<<<<<< HEAD
-  import {Products, SingleProduct, AccountForm, SingleProductPage} from './'
-=======
-  import {Products, SingleProduct, AccountForm, Home } from './'
->>>>>>> main
+  import {Products, SingleProduct, AccountForm, SingleProductPage, Home } from './'
 
 
 const Site = ({products, setToken}) => {
