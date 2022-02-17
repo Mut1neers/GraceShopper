@@ -73,6 +73,7 @@ const App = () => {
         userData={userData}
         token={token}
         users={users}
+        orders={orders}
       />
       
       <p>API Status: {APIHealth}</p>
