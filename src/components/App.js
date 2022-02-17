@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { callApi } from '../api';
-
-import { Site, NavBar } from './';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Site } from './';
 
 import { getAPIHealth } from '../axios-services';
 import '../style/App.css';
@@ -66,7 +66,7 @@ const App = () => {
 
   return (
     <div className='app-container'>
-      <NavBar />
+  
       <Site 
         products={products}
         setToken={setToken}
