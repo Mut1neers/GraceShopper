@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const usersRouter = express.Router();
 const { requireUser } = require('../db/util');
 const { getAllUsers, getUser, createUser, getUserById } = require('../db/models/user');
@@ -11,23 +11,26 @@ usersRouter.use((req, res, next) => {
   next();
 });
 
-usersRouter.get('/', async (req, res) => {
+usersRouter.get("/", async (req, res) => {
   const users = await getAllUsers();
-  console.log('USERS: ', users);
+  console.log("USERS: ", users);
   res.send(users);
 });
 
-usersRouter.post('/login', async (req, res, next) => {
+usersRouter.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
     next({
-      name: 'MissingCredentialError',
-      message: 'Please supply both a username and password',
+      name: "MissingCredentialError",
+      message: "Please supply all required fields",
     });
   }
 
   try {
-    const user = await getUser({ username, password });
+    const user = await getUser({
+      username,
+      password,
+    });
     if (user) {
       const token = jwt.sign(
         {
@@ -42,8 +45,8 @@ usersRouter.post('/login', async (req, res, next) => {
       });
     } else {
       next({
-        name: 'IncorrectCredentialError',
-        message: 'Username or password is incorrect',
+        name: "IncorrectCredentialError",
+        message: "Username or password is incorrect",
       });
     }
   } catch (error) {
@@ -52,30 +55,36 @@ usersRouter.post('/login', async (req, res, next) => {
   }
 });
 
-usersRouter.post('/register', async (req, res, next) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
+usersRouter.post("/register", async (req, res, next) => {
+  const { username, password, firstName, lastName, email } = req.body;
+  if (!username || !password || !firstName || !lastName || !email) {
     next({
-      name: 'MissingRegisterInfoError',
-      message: 'Please supply all fields',
+      name: "MissingRegisterInfoError",
+      message: "Please supply all fields",
     });
   } else {
     try {
-      const _user = await getUser(username);
+      const _user = await getUser(
+        username,
+        password,
+        firstName,
+        lastName,
+        email
+      );
 
       if (_user) {
         res.status(401);
         next({
-          name: 'UserExistsError',
-          message: 'A user by that username already exists',
+          name: "UserExistsError",
+          message: "A user by that username already exists",
         });
       }
 
       if (password.length < 8) {
         res.status(401);
         next({
-          name: 'PasswordLengthError',
-          message: 'Password too short!',
+          name: "PasswordLengthError",
+          message: "Password too short!",
         });
       } else {
         const user = await createUser({
@@ -84,8 +93,8 @@ usersRouter.post('/register', async (req, res, next) => {
         });
         if (!user) {
           next({
-            name: 'UserCreationError',
-            message: 'Error creating user!',
+            name: "UserCreationError",
+            message: "Error creating user!",
           });
         } else {
           res.send({ user: user });
@@ -108,13 +117,15 @@ usersRouter.get('/me', requireUser, async (req, res, next) => {
     console.log('REQ.USER: ', req.user);
     res.send(user);
   } catch (error) {
+
     console.error('User is not authorized!', error.message);
     next({
-      name: 'UnauthorizedAccessError',
-      message: 'User is not authorized',
+      name: "UnauthorizedAccessError",
+      message: "User is not authorized",
     });
   }
 });
+
 
 usersRouter.get('/:userId/orders', requireUser, async (req, res, next) => {
   try {

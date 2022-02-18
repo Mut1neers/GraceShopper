@@ -37,7 +37,6 @@
     "jsx-runtime": "^1.2.0",
     "morgan": "^1.10.0",
     "pg": "^8.2.1",
-    "react": "^17.0.2",
     "react-bootstrap": "^2.1.2",
     "react-dom": "^16.13.1",
     "react-hook-form": "^7.26.0",
