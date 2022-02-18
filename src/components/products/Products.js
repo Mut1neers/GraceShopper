@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Grid }  from '@material-ui/core';
 import { SingleProduct } from '..';
 import { Link, useHistory, useParams } from "react-router-dom";

@@ -57,6 +57,7 @@ const Site = ({products, setToken, userData, token, users, orders}) => {
                     token={token}
                     users={users}
                     orders={orders}
+                    action='myAccount'
             />
             </Route>
             <Route exact path="/cart">

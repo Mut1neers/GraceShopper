@@ -42,11 +42,7 @@ const App = () => {
     console.log("products: ", products);
     return products;
   };
-  const fetchUsers = async () => {
-    const users = await callApi({ url: '/users' });
-    console.log('users: ', users);
-    return users;
-  };
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,8 +50,8 @@ const App = () => {
       setOrders(orders);
       const products = await fetchProducts();
       setProducts(products);
-      const users = await fetchUsers();
-      setUsers(users);
+      const theUsers = await fetchUsers();
+      setUsers(theUsers);
       if (!token) {
         setToken(localStorage.getItem("token"));
         return;
