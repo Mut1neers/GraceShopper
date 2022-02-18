@@ -1,5 +1,6 @@
-import React from 'react'
+import React from "react";
 import {
+
     BrowserRouter as Router,
     Switch,
     Route,
@@ -8,6 +9,8 @@ import {
   } from "react-router-dom";
   import {Products, AccountForm, SingleProductPage, Home, UserProfile, NavBar, Cart } from './'
 
+
+export default Site;
 
 const Site = ({products, setToken, userData, token, users, orders}) => {
     return (
