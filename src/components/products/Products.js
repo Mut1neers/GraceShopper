@@ -5,8 +5,31 @@ import { Link, useHistory, useParams } from "react-router-dom";
 
 
 
+const searchedProducts = (product, searchTerm) => {
+    const lowerCaseSearch = searchTerm.toLowerCase();
+    const {
+      price,
+      category,
+      title,
+      description,
+  
+    } = product;
+  
+    const toMatch = [description, category, title, price];
+  
+    for (const field of toMatch) {
+      if (field.toLowerCase().includes(lowerCaseSearch)) {
+        return true;
+      }
+    }
+  }
 
  const Products = ({products}) => {
+
+
+      const [searchTerm, setSearchTerm] = useState('')
+      const history = useHistory();
+      const productsToDisplay = products.filter((product) => searchedProducts(product, searchTerm));
     
 
 
