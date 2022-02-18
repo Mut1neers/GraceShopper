@@ -10,7 +10,7 @@ import {
   import {Products, AccountForm, SingleProductPage, Home, UserProfile, NavBar, Cart } from './'
 
 
-export default Site;
+
 
 const Site = ({products, setToken, userData, token, users, orders}) => {
     return (
