@@ -1,8 +1,9 @@
 const express = require("express");
 const usersRouter = express.Router();
-const { requireUser } = require("../db/util");
-const { getAllUsers, getUser, createUser } = require("../db/models/user");
-const jwt = require("jsonwebtoken");
+const { requireUser } = require('../db/util');
+const { getAllUsers, getUser, createUser, getUserById } = require('../db/models/user');
+const jwt = require('jsonwebtoken');
+const { getOrdersByUser } = require('../db/models/orders');
 const { JWT_SECRET } = process.env;
 
 usersRouter.use((req, res, next) => {
@@ -106,15 +107,34 @@ usersRouter.post("/register", async (req, res, next) => {
   }
 });
 
-usersRouter.get("/me", requireUser, async (req, res, next) => {
+usersRouter.get('/me', requireUser, async (req, res, next) => {
+  const auth = req.header('Authorization');
+  const prefix = 'Bearer ';
+  const token = auth.slice(prefix.length);
+  const { id } = jwt.verify(token, JWT_SECRET);
   try {
-    res.send(req.user);
+    const user = await getUserById(id);
+    console.log('REQ.USER: ', req.user);
+    res.send(user);
   } catch (error) {
-    console.error("User is not authorized!", error);
+
+    console.error('User is not authorized!', error.message);
     next({
       name: "UnauthorizedAccessError",
       message: "User is not authorized",
     });
+  }
+});
+
+
+usersRouter.get('/:userId/orders', requireUser, async (req, res, next) => {
+  try {
+    const userId = req.params;
+    const orders = await getOrdersByUser(userId);
+    res.send(orders);
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 });
 

@@ -1,7 +1,7 @@
 const client = require('../client');
 const util = require('../util');
 
-async function getOrdersByProductId(id) {
+async function getOrderProductById(id) {
   try {
     const { rows: orderProduct } = await client.query(
       `
@@ -78,7 +78,7 @@ async function destroyOrderProduct(id) {
   }
 }
 module.exports = {
-  getOrdersByProductId,
+  getOrderProductById,
   addProductToOrder,
   updateOrderProduct,
   destroyOrderProduct,

@@ -1,27 +1,7 @@
 import React from 'react';
-import Home from '../Home';
-import AccountForm from '../AccountForm';
-import Products from '../products/Products';
 import './NavBar.css';
-
-
-const MenuItems = [
-    {
-        title: 'Home',
-        url: <Home />,
-        class: 'nav-links'
-    },
-    {
-        title: 'Products List',
-        url: <Products />,
-        class: 'nav-links'
-    },
-    {
-        title: 'Register',
-        url: <AccountForm />,
-        class: 'nav-links'
-    },
-];
+import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const NavBar = () => {
@@ -38,18 +18,41 @@ const NavBar = () => {
          <div className='search-bar'><input type='search' placeholder='Search Our Products Library'></input>
          <span className='fa fa-search'></span>
          </div>
-         <ul>
-             {MenuItems.map((item, index) => {
-                 return (
-                    <li key={index}>
-                        <a className={item.class} href={item.url} >
-                         {item.title}   
-                        </a>
-                    </li>
-                 )
-             })}
-            
-         </ul>
+        <div className='Links-block'>
+            <span className='links'>
+            <Link to='/'>
+                Home
+            </Link>
+            </span>
+            <span className='links'>
+            <Link to='/products'>
+                Products List
+            </Link>
+            </span>
+            <span className='links'>
+            <Link to='/login'>
+                Sign In
+            </Link>
+            </span>
+            <span className='links'>
+            <Link to='/register'>
+                Sign Up
+            </Link>
+            </span>
+            <span className='links'>
+            <Link to='/users/me'>
+                Profile
+            </Link>
+            </span>
+            <span className='links'>
+            <Link to='/cart' className="ml-auto">
+                <button>
+                    <i className='fas fa-cart-plus' />
+                    Shopping Cart
+                </button> 
+            </Link>
+            </span>
+        </div>
      </nav>
      </> 
     )

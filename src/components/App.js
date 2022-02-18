@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { callApi } from "../api";
+import React, { useState, useEffect } from 'react';
+import { callApi } from '../api';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Site } from './';
 
-import { Site, NavBar } from "./";
-
-// getAPIHealth is defined in our axios-services directory index.js
-// you can think of that directory as a collection of api adapters
-// where each adapter fetches specific info from our express server's /api route
-import { getAPIHealth } from "../axios-services";
-import "../style/App.css";
+import { getAPIHealth } from '../axios-services';
+import '../style/App.css';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
@@ -15,6 +12,7 @@ const App = () => {
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState({});
+  const [users, setUsers] = useState([])
 
   const fetchUserData = async (token) => {
     const data = await callApi({
@@ -35,6 +33,11 @@ const App = () => {
     console.log("products: ", products);
     return products;
   };
+  const fetchUsers = async () => {
+    const users = await callApi({ url: '/users' });
+    console.log('users: ', users);
+    return users;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +45,8 @@ const App = () => {
       setOrders(orders);
       const products = await fetchProducts();
       setProducts(products);
+      const users = await fetchUsers();
+      setUsers(users);
       if (!token) {
         setToken(localStorage.getItem("token"));
         return;
@@ -62,10 +67,18 @@ const App = () => {
   }, [token]);
 
   return (
-    <div className="app-container">
-      <NavBar />
-      <Site products={products} setToken={setToken} />
 
+    <div className='app-container'>
+  
+      <Site 
+        products={products}
+        setToken={setToken}
+        userData={userData}
+        token={token}
+        users={users}
+        orders={orders}
+      />
+      
       <p>API Status: {APIHealth}</p>
     </div>
   );

@@ -1,6 +1,7 @@
 const express = require('express');
 const { getAllOrders, createOrder, getCartByUser } = require('../db/models/orders');
-const { requireUser } = require('../db/util');
+const { addProductToOrder } = require('../db/models/order_products');
+const { requireUser, requireAdmin } = require('../db/util');
 const ordersRouter = express.Router();
 
 ordersRouter.use((req, res, next) => {
@@ -8,7 +9,7 @@ ordersRouter.use((req, res, next) => {
   next();
 });
 
-ordersRouter.get('/', async (req, res, next) => {
+ordersRouter.get('/', requireAdmin, async (req, res, next) => {
   try {
     const orders = await getAllOrders();
     res.send(orders);
@@ -49,6 +50,22 @@ ordersRouter.post('/', requireUser, async (req, res, next) => {
   } catch (error) {
     console.error(error);
     next(error);
+  }
+});
+
+ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
+  try {
+    const orderId = req.params.orderId;
+    const { productId, price, quantity } = req.body;
+    const addedProduct = await addProductToOrder({ orderId, productId, price, quantity });
+    if (addedProduct) {
+      res.send(addedProduct);
+    } else {
+      next({ name: 'ErrorAddingProductToOrder', message: 'Cannot add product to order' });
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 });
 
