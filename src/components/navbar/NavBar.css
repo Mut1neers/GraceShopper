@@ -1,26 +1,38 @@
-nav.NavBarItems {
-    background: linear-gradient(90deg, rgb(110,94,254) 0%, rgba(73,63,252,1) 100%);
-    height: 80px;
+.NavBarItems {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.2rem;
+    background-color: #2a2a72;
+   justify-content: space-between;
+    
 }
 
-ul {
+.navbar-logo {
     display: flex;
-    flex-direction: column;
-    color: white;
+    padding: 16px;
+    color: #ffa400;
 }
 
-h1.navbar-logo {
-    color: white;
-    justify-content: start;
-    margin-left: 20px;
-    cursor: pointer;
+.Links-block {
+    padding: 16px;
+    
+    
+
 }
 
+span {
+    color:#ffa400;
+}
 
+.links {
+    padding: 4px;
+}
 
+.search-bar {
+    display: flex;
+    align-items: center;
+    
+}
+
+input {
+    width: 260px;
+}

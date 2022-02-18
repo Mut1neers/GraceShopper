@@ -6,15 +6,17 @@ import {
     useParams,
     BrowserRouter
   } from "react-router-dom";
-  import {Products, SingleProduct, AccountForm, SingleProductPage, Home, UserProfile } from './'
+  import {Products, AccountForm, SingleProductPage, Home, UserProfile, NavBar, Cart } from './'
 
 
 const Site = ({products, setToken, userData, token, users, orders}) => {
     return (
         <BrowserRouter>
-            <Route exact path="/">
-            <Home />
-            </Route>
+        <NavBar />
+        <Switch>
+            <Route exact path="/" component={Home} />
+            
+           
             <Route exact path="/products">
                 <Products 
                     products={products}
@@ -51,13 +53,21 @@ const Site = ({products, setToken, userData, token, users, orders}) => {
                     token={token}
                     users={users}
                     orders={orders}
+            />
+            </Route>
+            <Route exact path="/cart">
+                <Cart
+                    userData={userData}
+                    token={token}
+                    users={users}
+                    orders={orders}
                 />
             </Route>
 
             
 
         
-        
+            </Switch>
         
         
         </BrowserRouter>
