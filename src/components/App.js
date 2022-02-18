@@ -23,6 +23,14 @@ const App = () => {
     return data;
   };
 
+  const fetchUsers = async () => {
+    const users = await callApi({
+      url: '/users',
+    });
+    console.log('USERS DATA: ', users);
+    return users;
+  } 
+
   const fetchOrders = async () => {
     const orders = await callApi({ url: "/orders" });
     console.log("orders: ", orders);
@@ -51,6 +59,8 @@ const App = () => {
         setToken(localStorage.getItem("token"));
         return;
       }
+      const users = await fetchUsers()
+      setUsers(users)
       const data = await fetchUserData(token);
       if (data) {
         setUserData(data);

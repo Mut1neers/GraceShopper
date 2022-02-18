@@ -44,6 +44,7 @@ const Site = ({products, setToken, userData, token, users, orders}) => {
             </Route>
             <Route exact path="/users/:userId">
                 <UserProfile
+                    users={users}
                     userData={userData}
                     token={token}
                     users={users}
@@ -66,13 +67,8 @@ const Site = ({products, setToken, userData, token, users, orders}) => {
                     orders={orders}
                 />
             </Route>
-
-            
-
         
             </Switch>
-        
-        
         </BrowserRouter>
         
 

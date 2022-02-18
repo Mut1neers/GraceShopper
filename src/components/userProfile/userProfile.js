@@ -1,6 +1,5 @@
 import React from 'react'
-import { useParams, Link, useHistory } from "react-router-dom";
-import { callApi } from "../../api";
+import { useParams } from "react-router-dom";
 
 const UserProfile = ({userData, token, users, orders}) => {
 
