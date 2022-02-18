@@ -12,6 +12,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 
   return ( 
    <main>
+       <div className='title'>Browse Through Tons of Fake NFTS</div>
         
         <Grid container justify='center' spacing={4}>
             {products.map((product) => {
@@ -22,7 +23,9 @@ import { Link, useHistory, useParams } from "react-router-dom";
                         key={product.id}
                         product={product}
                     /></Link>
+                    
                 )
+            
             })}
         </Grid>
     </main>
