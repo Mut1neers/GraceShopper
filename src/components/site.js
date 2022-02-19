@@ -42,15 +42,6 @@ const Site = ({products, setToken, userData, token, users, orders}) => {
                     setToken={setToken}
                 />
             </Route>
-            <Route exact path="/users/:userId">
-                <UserProfile
-                    users={users}
-                    userData={userData}
-                    token={token}
-                    users={users}
-                    orders={orders}
-                />
-            </Route>
             <Route exact path="/users/me">
                 <UserProfile
                     userData={userData}
