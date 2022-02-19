@@ -78,34 +78,34 @@ const AccountForm = ({ action, setToken }) => {
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="username"
+              placeholder="Username"
               value={username}
               required
               onChange={(event) => setUsername(event.target.value)}
             ></input>
             <input
               type="password"
-              placeholder="password"
+              placeholder="Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             ></input>
             <input
               type="text"
-              placeholder="firstName"
+              placeholder="First Name"
               value={firstName}
               required
               onChange={(event) => setFirstName(event.target.value)}
             ></input>
             <input
               type="text"
-              placeholder="lastName"
+              placeholder="Last Name"
               value={lastName}
               required
               onChange={(event) => setLastName(event.target.value)}
             ></input>
             <input
               type="text"
-              placeholder="email"
+              placeholder="Email"
               value={email}
               required
               onChange={(event) => setEmail(event.target.value)}
