@@ -1,7 +1,11 @@
-const express = require('express');
-const { getAllOrders, createOrder, getCartByUser } = require('../db/models/orders');
-const { addProductToOrder } = require('../db/models/order_products');
-const { requireUser, requireAdmin } = require('../db/util');
+const express = require("express");
+const {
+  getAllOrders,
+  createOrder,
+  getCartByUser,
+} = require("../db/models/orders");
+const { addProductToOrder } = require("../db/models/order_products");
+const { requireUser, requireAdmin } = require("../db/util");
 const ordersRouter = express.Router();
 
 ordersRouter.use((req, res, next) => {
@@ -9,20 +13,20 @@ ordersRouter.use((req, res, next) => {
   next();
 });
 
-ordersRouter.get('/', requireAdmin, async (req, res, next) => {
+ordersRouter.get("/", requireAdmin, async (req, res, next) => {
   try {
     const orders = await getAllOrders();
     res.send(orders);
-    console.log('ORDERS: ', orders);
+    console.log("ORDERS: ", orders);
   } catch (error) {
     next(error);
   }
 });
 
-ordersRouter.get('/cart', requireUser, async (req, res, next) => {
+ordersRouter.get("/cart", requireUser, async (req, res, next) => {
   const userCart = await getCartByUser(req.user);
   try {
-    if (userCart && userCart.status === 'created') {
+    if (userCart && userCart.status === "created") {
       res.send(userCart);
     }
   } catch (error) {
@@ -30,7 +34,7 @@ ordersRouter.get('/cart', requireUser, async (req, res, next) => {
   }
 });
 
-ordersRouter.post('/', requireUser, async (req, res, next) => {
+ordersRouter.post("/", requireUser, async (req, res, next) => {
   const { status, userId, datePlaced } = req.body;
   //   const userId = req.user.id;
   try {
@@ -43,8 +47,8 @@ ordersRouter.post('/', requireUser, async (req, res, next) => {
       res.send(createdOrder);
     } else {
       next({
-        name: 'FailedToCreateOrder',
-        message: 'Error creating order!',
+        name: "FailedToCreateOrder",
+        message: "Error creating order!",
       });
     }
   } catch (error) {
@@ -53,15 +57,23 @@ ordersRouter.post('/', requireUser, async (req, res, next) => {
   }
 });
 
-ordersRouter.post('/:orderId/products', requireUser, async (req, res, next) => {
+ordersRouter.post("/:orderId/products", requireUser, async (req, res, next) => {
   try {
     const orderId = req.params.orderId;
     const { productId, price, quantity } = req.body;
-    const addedProduct = await addProductToOrder({ orderId, productId, price, quantity });
+    const addedProduct = await addProductToOrder({
+      orderId,
+      productId,
+      price,
+      quantity,
+    });
     if (addedProduct) {
       res.send(addedProduct);
     } else {
-      next({ name: 'ErrorAddingProductToOrder', message: 'Cannot add product to order' });
+      next({
+        name: "ErrorAddingProductToOrder",
+        message: "Cannot add product to order",
+      });
     }
   } catch (error) {
     console.error(error);

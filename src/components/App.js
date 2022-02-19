@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { callApi } from '../api';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Site } from './';
+import React, { useState, useEffect } from "react";
 
-import { getAPIHealth } from '../axios-services';
-import '../style/App.css';
+import { callApi } from "../api";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import { Site } from "./";
+
+import { getAPIHealth } from "../axios-services";
+
+import "../style/App.css";
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
@@ -12,7 +16,7 @@ const App = () => {
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState({});
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
 
   const fetchUserData = async (token) => {
     const data = await callApi({
@@ -34,8 +38,8 @@ const App = () => {
     return products;
   };
   const fetchUsers = async () => {
-    const users = await callApi({ url: '/users' });
-    console.log('users: ', users);
+    const users = await callApi({ url: "/users" });
+    console.log("users: ", users);
     return users;
   };
 
@@ -67,10 +71,8 @@ const App = () => {
   }, [token]);
 
   return (
-
-    <div className='app-container'>
-  
-      <Site 
+    <div className="app-container">
+      <Site
         products={products}
         setToken={setToken}
         userData={userData}
@@ -78,7 +80,7 @@ const App = () => {
         users={users}
         orders={orders}
       />
-      
+
       <p>API Status: {APIHealth}</p>
     </div>
   );

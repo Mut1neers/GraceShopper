@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { callApi } from "../api";
 import { Container, Button } from "react-bootstrap";
 
@@ -20,13 +20,13 @@ const AccountForm = ({ action, setToken }) => {
   // const history = useHistory();
   // const actionURL = isLogin ? API_LOGIN : API_REGISTER;
 
-  const Register = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-  };
+  // const Register = () => {
+  //   const [username, setUsername] = useState("");
+  //   const [password, setPassword] = useState("");
+  //   const [firstName, setFirstName] = useState("");
+  //   const [lastName, setLastName] = useState("");
+  //   const [email, setEmail] = useState("");
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,12 +40,12 @@ const AccountForm = ({ action, setToken }) => {
       console.log("Password: ", password);
       console.log("DATA: ", { data });
       // const token = data?.data?.token;
-      const token = token;
+      // const token = token;
 
-      if (token) {
-        localStorage.setItem("token", token);
-        setToken(token);
-      }
+      // if (token) {
+      //   localStorage.setItem("token", token);
+      //   // setToken(token);
+      // }
     } catch (error) {
       console.error(error);
     }

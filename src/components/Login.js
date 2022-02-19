@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-
 const BASE_URL =
   "https://https://mutineers1.herokuapp.com//api/2108-LSU-RM-WEB-PT";
 
@@ -29,7 +28,7 @@ const Login = () => {
     if (response) {
       const data = await response.json();
       const token = data.data.token;
-      setTok;
+      // setToken;
       localStorage.setItem("token", token);
       setUsername("");
       setPassword("");
