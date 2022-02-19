@@ -16,7 +16,15 @@ const SingleProductPage = ({products}) => {
 
     return(
         <div>{product ? (
-            <h2>{product.name}</h2>
+
+
+           <div>
+               <image src={product.image}/>
+               <h2>{product.name}</h2>  
+               <h3>{product.price}</h3>
+           
+           </div>
+
 
         ):(
             <h2>product does not exist</h2>

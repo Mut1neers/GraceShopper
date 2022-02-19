@@ -13,6 +13,7 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState({});
   const [users, setUsers] = useState([])
+  const [serchterm, setSerchTerm] = useState([])
 
   const fetchUserData = async (token) => {
     const data = await callApi({
@@ -22,6 +23,14 @@ const App = () => {
     console.log("USERDATA: ", data);
     return data;
   };
+
+  const fetchUsers = async () => {
+    const users = await callApi({
+      url: '/users',
+    });
+    console.log('USERS DATA: ', users);
+    return users;
+  } 
 
   const fetchOrders = async () => {
     const orders = await callApi({ url: "/orders" });
@@ -33,11 +42,7 @@ const App = () => {
     console.log("products: ", products);
     return products;
   };
-  const fetchUsers = async () => {
-    const users = await callApi({ url: '/users' });
-    console.log('users: ', users);
-    return users;
-  };
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,12 +50,14 @@ const App = () => {
       setOrders(orders);
       const products = await fetchProducts();
       setProducts(products);
-      const users = await fetchUsers();
-      setUsers(users);
+      const theUsers = await fetchUsers();
+      setUsers(theUsers);
       if (!token) {
         setToken(localStorage.getItem("token"));
         return;
       }
+      const users = await fetchUsers()
+      setUsers(users)
       const data = await fetchUserData(token);
       if (data) {
         setUserData(data);
