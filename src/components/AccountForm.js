@@ -34,9 +34,9 @@ const AccountForm = ({ action, setToken }) => {
     event.preventDefault();
     try {
       const data = await callApi({
-        url: '/users/register',
-        method: 'POST',
-        body: { username, password, firstName, lastName, email, imageurl, isAdmin },
+        url: "user/register",
+        method: "POST",
+        body: { username, password, firstName, lastName, email },
       });
       console.log('Username: ', username);
       console.log('Password: ', password);
@@ -82,35 +82,35 @@ const AccountForm = ({ action, setToken }) => {
         ) : (
           <form onSubmit={handleSubmit}>
             <input
-              type='text'
-              placeholder='username'
+              type="text"
+              placeholder="Username"
               value={username}
               required
               onChange={(event) => setUsername(event.target.value)}
             ></input>
             <input
-              type='password'
-              placeholder='password'
+              type="password"
+              placeholder="Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             ></input>
             <input
-              type='text'
-              placeholder='firstName'
+              type="text"
+              placeholder="First Name"
               value={firstName}
               required
               onChange={(event) => setFirstName(event.target.value)}
             ></input>
             <input
-              type='text'
-              placeholder='lastName'
+              type="text"
+              placeholder="Last Name"
               value={lastName}
               required
               onChange={(event) => setLastName(event.target.value)}
             ></input>
             <input
-              type='text'
-              placeholder='email'
+              type="text"
+              placeholder="Email"
               value={email}
               required
               onChange={(event) => setEmail(event.target.value)}

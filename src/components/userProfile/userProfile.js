@@ -1,37 +1,41 @@
-import React from 'react';
-import { useParams, Link, useHistory } from 'react-router-dom';
-import { callApi } from '../../api';
+import React from 'react'
+import { useParams } from "react-router-dom";
 
-const UserProfile = ({ userData, token, users, orders }) => {
-  const History = useHistory();
-  const { userId } = useParams();
-  const user = users.find((user) => parseInt(userId) === user.id);
-  const ordersToDisplay = orders.filter((order) => order.userId === parseInt(userId));
-  console.log('ordersToDisplay', ordersToDisplay);
+const UserProfile = ({userData, token, users, orders, action}) => {
 
-  // const isTheUser = token.id === user.id
+    const { userId } = useParams();
 
-  return (
-    <div>
-      <div>{user ? <h2>Hello {user.username}</h2> : <h2> no User Here </h2>}</div>
+    const user = users.find((user) => userData.id === user.id)
 
-      <div>
-        {ordersToDisplay ? (
-          <div>
-            {ordersToDisplay.map((order) => {
-              return (
-                <>
-                  <h2>{order.datePlaced}</h2>
-                </>
-              );
-            })}
-          </div>
-        ) : (
-          <h2> no Orders </h2>
-        )}
-      </div>
-    </div>
-  );
-};
+    const ordersToDisplay = orders.filter((order) => order.userId === userData.id)
 
-export default UserProfile;
+
+return ( <div>
+            { user ? (
+                <h2>Hello {user.username}</h2>
+            ) : (
+                <h2> no User Here </h2>
+            )}
+        
+            {ordersToDisplay ? (
+                <div>
+                {ordersToDisplay.map((order) => {
+                    return (
+                        <>
+                        <h2>{order.datePlaced}</h2>
+                        </>
+                    )
+                }
+                )}
+                
+                </div>
+                
+            ) : (
+                <h2> no Orders </h2>
+            )}
+        </div>
+        )
+
+}
+
+export default UserProfile

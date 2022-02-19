@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
+
 const NavBar = () => {
 
    
@@ -15,7 +17,9 @@ const NavBar = () => {
              
              
          </div>
-         <div className='search-bar'><input type='search' placeholder='Search Our Products Library'></input>
+         <div className='search-bar'>
+             <input type='search' placeholder='Search Our Products Library'></input>
+             <button type="submit"></button>
          <span className='fa fa-search'></span>
          </div>
         <div className='Links-block'>
