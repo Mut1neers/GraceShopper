@@ -40,7 +40,7 @@ const searchedProducts = (product, searchTerm) => {
         <Grid container justify='center' spacing={4}>
             {products.map((product) => {
                 return (
-                    <Link to={`/products/:productId`}> 
+                    <Link to={`/products/${product.id}`}> 
                     <SingleProduct 
 
                         key={product.id}
