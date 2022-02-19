@@ -1,82 +1,44 @@
-import React from "react";
-import {
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, useParams, BrowserRouter } from 'react-router-dom';
+import { Products, AccountForm, SingleProductPage, Home, UserProfile, NavBar, Cart, Login } from './';
 
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useParams,
-    BrowserRouter
-  } from "react-router-dom";
-  import {Products, AccountForm, SingleProductPage, Home, UserProfile, NavBar, Cart } from './'
+const Site = ({ products, setToken, userData, token, users, orders }) => {
+  return (
+    <BrowserRouter>
+      <NavBar />
+      <Switch>
+        <Route exact path='/' component={Home} />
 
-
-
-
-const Site = ({products, setToken, userData, token, users, orders}) => {
-    return (
-        <BrowserRouter>
-        <NavBar />
-        <Switch>
-            <Route exact path="/" component={Home} />
-            
-           
-            <Route exact path="/products">
-                <Products 
-                    products={products}
-                />
-            </Route>
-            <Route exact path="/products/:productId">
-                <SingleProductPage 
-                    products={products}
-                />
-            </Route>
-            <Route exact path="/login">
+        <Route exact path='/products'>
+          <Products products={products} />
+        </Route>
+        <Route exact path='/products/:productId'>
+          <SingleProductPage products={products} />
+        </Route>
+        {/* <Route exact path="/login">
                 <AccountForm
                     action='login'
                     setToken={setToken}
                 />
-            </Route>
-            <Route exact path="/register">
-                <AccountForm
-                    action='register'
-                    setToken={setToken}
-                />
-            </Route>
-            <Route exact path="/users/:userId">
-                <UserProfile
-                    userData={userData}
-                    token={token}
-                    users={users}
-                    orders={orders}
-                />
-            </Route>
-            <Route exact path="/users/me">
-                <UserProfile
-                    userData={userData}
-                    token={token}
-                    users={users}
-                    orders={orders}
-            />
-            </Route>
-            <Route exact path="/cart">
-                <Cart
-                    userData={userData}
-                    token={token}
-                    users={users}
-                    orders={orders}
-                />
-            </Route>
+            </Route> */}
+        <Route exact path='/login'>
+          <Login action='login' setToken={setToken} />
+        </Route>
+        <Route exact path='/register'>
+          <AccountForm action='register' setToken={setToken} />
+        </Route>
+        <Route exact path='/users/:userId'>
+          <UserProfile userData={userData} token={token} users={users} orders={orders} />
+        </Route>
+        <Route exact path='/users/me'>
+          <UserProfile userData={userData} token={token} users={users} orders={orders} />
+        </Route>
+        <Route exact path='/cart'>
+          <Cart userData={userData} token={token} users={users} orders={orders} />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
-            
-
-        
-            </Switch>
-        
-        
-        </BrowserRouter>
-        
-
-    )
-}
-
-export default Site
+export default Site;
