@@ -8,12 +8,14 @@ export { default as NavBar } from './navbar/NavBar';
 
 export { default as Site } from './site';
 
-export { default as AccountForm } from './AccountForm'
+export { default as AccountForm } from './AccountForm';
 
-export { default as SingleProductPage } from './products/SingleProductPage'
+export { default as SingleProductPage } from './products/SingleProductPage';
 
 export { default as Home } from './Home';
 
 export { default as UserProfile } from './userProfile/userProfile';
 
 export { default as Cart } from './Cart';
+
+export { default as Login } from './Login';
