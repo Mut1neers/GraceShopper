@@ -66,11 +66,10 @@ usersRouter.post("/register", async (req, res, next) => {
     try {
       const _user = await getUser(
         username,
-        password,
-        firstName,
-        lastName,
-        email
+        password
       );
+
+      console.log('_user', _user)
 
       if (_user) {
         res.status(401);
@@ -90,6 +89,10 @@ usersRouter.post("/register", async (req, res, next) => {
         const user = await createUser({
           username,
           password,
+          firstName,
+          lastName,
+          email,
+          isAdmin: false,
         });
         if (!user) {
           next({

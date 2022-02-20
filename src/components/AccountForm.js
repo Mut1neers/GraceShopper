@@ -40,6 +40,7 @@ const AccountForm = ({ action, setToken }) => {
       });
       console.log('Username: ', username);
       console.log('Password: ', password);
+      console.log('FirstName', firstName)
       console.log('DATA: ', data);
       const token = data?.token;
       // const token = token;
