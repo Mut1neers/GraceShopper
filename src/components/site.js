@@ -15,6 +15,7 @@ const Site = ({ products, setToken, userData, token, users, orders }) => {
         <Route exact path='/products/:productId'>
           <SingleProductPage products={products} />
         </Route>
+
         <Route path="/login">
                 <Login 
                     setToken={setToken}
@@ -50,5 +51,6 @@ const Site = ({ products, setToken, userData, token, users, orders }) => {
 
     )
 }
+
 
 export default Site;
