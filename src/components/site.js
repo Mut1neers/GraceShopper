@@ -15,21 +15,42 @@ const Site = ({ products, setToken, userData, token, users, orders }) => {
         <Route exact path='/products/:productId'>
           <SingleProductPage products={products} />
         </Route>
-        <Route exact path='/login'>
-          <Login action='login' setToken={setToken} />
-        </Route>
-        <Route exact path='/register'>
-          <AccountForm action='register' setToken={setToken} />
-        </Route>
-        <Route exact path='/users/me'>
-          <UserProfile userData={userData} token={token} users={users} orders={orders} action='myAccount' />
-        </Route>
-        <Route exact path='/cart'>
-          <Cart userData={userData} token={token} users={users} orders={orders} />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
-};
+
+        <Route path="/login">
+                <Login 
+                    setToken={setToken}
+                />
+            </Route>
+            <Route path="/register">
+                <AccountForm
+                    action='register'
+                    setToken={setToken}
+                />
+            </Route>
+            <Route exact path="/users/me">
+                <UserProfile
+                    userData={userData}
+                    token={token}
+                    users={users}
+                    orders={orders}
+                    action='myAccount'
+            />
+            </Route>
+            <Route exact path="/cart">
+                <Cart
+                    userData={userData}
+                    token={token}
+                    users={users}
+                    orders={orders}
+                />
+            </Route>
+        
+            </Switch>
+        </BrowserRouter>
+        
+
+    )
+}
+
 
 export default Site;

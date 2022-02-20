@@ -44,7 +44,7 @@ async function buildTables() {
       lastName VARCHAR(255) NOT NULL,
       email VARCHAR(255) UNIQUE NOT NULL,
       imageURL VARCHAR(255),
-      "isAdmin" BOOLEAN DEFAULT false NOT NULL
+      "isAdmin" BOOLEAN DEFAULT false 
     );
 
     CREATE TABLE products(
