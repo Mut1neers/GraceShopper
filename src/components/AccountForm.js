@@ -34,7 +34,7 @@ const AccountForm = ({ action, setToken }) => {
     event.preventDefault();
     try {
       const data = await callApi({
-        url: "user/register",
+        url: "/users/register",
         method: "POST",
         body: { username, password, firstName, lastName, email },
       });

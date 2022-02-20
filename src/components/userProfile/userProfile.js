@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from "react-router-dom";
 
-const UserProfile = ({userData, token, users, orders, action}) => {
+const UserProfile = ({userData, token, users, orders}) => {
 
     const { userId } = useParams();
 

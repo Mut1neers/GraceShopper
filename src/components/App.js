@@ -50,8 +50,6 @@ const App = () => {
       setOrders(orders);
       const products = await fetchProducts();
       setProducts(products);
-      const theUsers = await fetchUsers();
-      setUsers(theUsers);
       if (!token) {
         setToken(localStorage.getItem("token"));
         return;

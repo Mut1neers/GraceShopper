@@ -15,13 +15,12 @@ const Site = ({ products, setToken, userData, token, users, orders }) => {
         <Route exact path='/products/:productId'>
           <SingleProductPage products={products} />
         </Route>
-        {/* <Route exact path="/login">
-                <AccountForm
-                    action='login'
+        <Route path="/login">
+                <Login 
                     setToken={setToken}
                 />
             </Route>
-            <Route exact path="/register">
+            <Route path="/register">
                 <AccountForm
                     action='register'
                     setToken={setToken}
