@@ -7,7 +7,7 @@ const UserProfile = ({userData, token, users, orders}) => {
 
     const user = users.find((user) => userData.id === user.id)
 
-    const ordersToDisplay = orders.filter((order) => order.userId === userData.id)
+    // const ordersToDisplay = orders.filter((order) => order.userId === userData.id)
 
 
 return ( <div>
@@ -17,22 +17,7 @@ return ( <div>
                 <h2> no User Here </h2>
             )}
         
-            {ordersToDisplay ? (
-                <div>
-                {ordersToDisplay.map((order) => {
-                    return (
-                        <>
-                        <h2>{order.datePlaced}</h2>
-                        </>
-                    )
-                }
-                )}
-                
-                </div>
-                
-            ) : (
-                <h2> no Orders </h2>
-            )}
+          
         </div>
         )
 

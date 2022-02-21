@@ -79,7 +79,7 @@ usersRouter.post("/register", async (req, res, next) => {
         });
       }
 
-      if (password.length < 8) {
+     else if (password.length < 8) {
         res.status(401);
         next({
           name: "PasswordLengthError",
@@ -100,7 +100,14 @@ usersRouter.post("/register", async (req, res, next) => {
             message: "Error creating user!",
           });
         } else {
-          res.send({ user: user });
+          const token = jwt.sign(
+            {
+              id: user.id,
+              username,
+            },
+            JWT_SECRET
+          );
+          res.send({ user: user, token });
         }
       }
     } catch (error) {

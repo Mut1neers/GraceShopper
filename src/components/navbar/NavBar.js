@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './NavBar.css';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,8 +6,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-const NavBar = () => {
+const NavBar = ({token, setToken}) => {
+const [isLoggedin, setIsLoggedIn] = useState(false)
 
+useEffect(() => {
+    if (localStorage.getItem("token")){
+        setIsLoggedIn(true); 
+    }else {
+        setIsLoggedIn(false); 
+    }
+    
+},[token])
    
     return (
      <>
@@ -34,15 +43,32 @@ const NavBar = () => {
             </Link>
             </span>
             <span className='links'>
-            <Link to='/login'>
+                {token ? (
+                    <span className='links'>
+                    <Link to='/'
+                    onClick = {()=>{
+                        alert("You have been Logged Out")
+                        setToken("")
+
+                        setIsLoggedIn(false)
+                        localStorage.removeItem("token");
+                    }}>
+                        Logout
+                    </Link>
+                    </span>
+                ) : (
+                    <span>  <Link to='/login'>
                 Sign In
-            </Link>
-            </span>
-            <span className='links'>
-            <Link to='/register'>
+            </Link> / <Link to='/register'>
                 Sign Up
-            </Link>
+            </Link>  </span>
+                    
+                )}
+           
             </span>
+            
+           
+            
             <span className='links'>
             <Link to='/users/me'>
                 Profile
