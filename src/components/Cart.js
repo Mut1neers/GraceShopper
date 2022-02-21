@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { callApi } from "../api";
 
-const Cart = () => {
-  return (
-    <div>Cart</div>
-  )
-}
+const Cart = ({ token }) => {
+  const [cart, setCart] = useState([]);
+  const fetchCart = async () => {
+    const cartResponse = await callApi({
+      method: "GET",
+      token,
+      url: "/orders/cart",
+    });
+    setCart(cartResponse);
+  };
 
-export default Cart
+  useEffect(() => {
+    if (token) {
+      fetchCart();
+    }
+  }, [token]);
+
+  return <div>Cart</div>;
+};
+
+export default Cart;
