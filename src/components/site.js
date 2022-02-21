@@ -5,7 +5,10 @@ import { Products, AccountForm, SingleProductPage, Home, UserProfile, NavBar, Ca
 const Site = ({ products, setToken, userData, token, users, orders }) => {
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar
+        setToken={setToken}
+        token={token}
+      />
       <Switch>
         <Route exact path='/' component={Home} />
 
