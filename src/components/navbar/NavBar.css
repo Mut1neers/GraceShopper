@@ -2,9 +2,17 @@
     width: 100%;
     display: flex;
     background-color: #2a2a72;
-   justify-content: space-between;
-    
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
 }
+    
 
 .navbar-logo {
     display: flex;
@@ -14,9 +22,10 @@
 
 .Links-block {
     padding: 16px;
+    /* display:flex; */
     
     
-
+    
 }
 
 span {

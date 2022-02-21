@@ -1,0 +1,27 @@
+body{
+  font-family:'Oswald', sans-serif !important; 
+  background: var(--mainWhite) !important;
+  color: var(--mainDark) !important;
+}
+
+.cart-item-cards {
+    background-color:#2a2a72;
+    color: #ffa400;
+    width: 75%;
+    /* flex-shrink: 2; */
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    border-radius: 2px;
+
+}
+
+.individual-cards {
+    background-color:#2a2a72;
+    color: #ffa400;
+    width: 75%;
+    /* flex-shrink: 2; */
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    border-radius: 2px;
+
+}
