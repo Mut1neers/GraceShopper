@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { callApi } from "../api";
+import "../style/cart.css";
 
 const Cart = ({ token }) => {
   const [cart, setCart] = useState([]);
