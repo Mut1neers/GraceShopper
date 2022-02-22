@@ -22,7 +22,7 @@ const Cart = ({ token }) => {
   return (
     <div className="cart">
       <div>
-        <h1>My NFT's - Shop</h1>
+        <h1 className="title-info">My NFT's - Shop</h1>
         <div className="cart-item-cards">
           <div>
             {cart.length ? (
@@ -30,7 +30,7 @@ const Cart = ({ token }) => {
                 <h2>Item Name</h2>
               </div>
             ) : (
-              <h2>
+              <h2 className="cart-status">
                 Your shopping cart is sad. Make it happy by adding some sweet
                 NFT's!
               </h2>
