@@ -15,6 +15,7 @@ import {
   NavBar,
   Cart,
   Login,
+  Footer
 } from "./";
 
 const Site = ({ products, setToken, userData, token, users, orders }) => {
@@ -55,6 +56,7 @@ const Site = ({ products, setToken, userData, token, users, orders }) => {
           />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 };
