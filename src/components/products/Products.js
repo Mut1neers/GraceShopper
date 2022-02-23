@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Grid }  from '@material-ui/core';
 import { SingleProduct } from '..';
 import { Link, useHistory, useParams } from "react-router-dom";
-
+import "../../style/products.css";
 
 
 const searchedProducts = (product, searchTerm) => {

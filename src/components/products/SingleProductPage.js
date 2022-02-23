@@ -1,7 +1,6 @@
 import React from 'react';
-import { SingleProduct } from '..';
-import { AddShoppingCart } from '@material-ui/icons';
 import { useParams, useHistory } from 'react-router-dom';
+import "../../style/singleproductpage.css";
 
 const SingleProductPage = ({ products }) => {
   const history = useHistory();
@@ -10,12 +9,13 @@ const SingleProductPage = ({ products }) => {
   const product = products.find((product) => parseInt(productId) === product.id);
 
   return (
-    <div>
+    <div  className='product-card'>
       {product ? (
-        <div>
-          <image src={product.image} />
+        <div className='content'>
+          <img src={product.imageurl} />
           <h2>{product.name}</h2>
           <h3>{product.price}</h3>
+          <h4>{product.description}</h4>
         </div>
       ) : (
         <h2>product does not exist</h2>
