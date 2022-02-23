@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { callApi } from '../api';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Site } from './';
+import React, { useState, useEffect } from "react";
+import { callApi } from "../api";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Site } from "./";
 
-import { getAPIHealth } from '../axios-services';
-import '../style/App.css';
+import { getAPIHealth } from "../axios-services";
+import "../style/App.css";
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -25,8 +25,9 @@ const App = () => {
 
   const fetchUsers = async () => {
     const users = await callApi({
-      url: '/users',
+      url: "/users",
     });
+
     return users;
   };
 
@@ -38,6 +39,24 @@ const App = () => {
     const products = await callApi({ url: '/products' });
     return products;
   };
+
+
+  const [cart, setCart] = useState([]);
+  const fetchCart = async () => {
+    const cartResponse = await callApi({
+      method: "GET",
+      token,
+      url: "/orders/cart",
+    });
+    setCart(cartResponse);
+  };
+
+  useEffect(() => {
+    if (token) {
+      fetchCart();
+    }
+  }, [token]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +84,10 @@ const App = () => {
   }, [token]);
 
   return (
+
+
     <div className='app-container'>
+
       <Site
         products={products}
         setToken={setToken}
@@ -73,6 +95,8 @@ const App = () => {
         token={token}
         users={users}
         orders={orders}
+        cart={cart}
+        setCart={setCart}
       />
 
       <p>API Status: {APIHealth}</p>
