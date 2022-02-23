@@ -1,5 +1,6 @@
 node_modules
 build
 dotenv
+.env
 package-lock.json
 
