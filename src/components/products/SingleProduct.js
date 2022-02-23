@@ -23,7 +23,7 @@ const SingleProduct = ({ product, cart, setCart }) => {
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={product.image}
+        image={product.imageurl}
         title={product.name}
       />
       <CardContent>
