@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { callApi } from '../api';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Site } from './';
+import React, { useState, useEffect } from "react";
+import { callApi } from "../api";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Site } from "./";
 
-import { getAPIHealth } from '../axios-services';
-import '../style/App.css';
+import { getAPIHealth } from "../axios-services";
+import "../style/App.css";
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
@@ -12,8 +12,8 @@ const App = () => {
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState({});
-  const [users, setUsers] = useState([])
-  const [serchterm, setSerchTerm] = useState([])
+  const [users, setUsers] = useState([]);
+  const [serchterm, setSerchTerm] = useState([]);
 
   const fetchUserData = async (token) => {
     const data = await callApi({
@@ -26,11 +26,11 @@ const App = () => {
 
   const fetchUsers = async () => {
     const users = await callApi({
-      url: '/users',
+      url: "/users",
     });
-    console.log('USERS DATA: ', users);
+    console.log("USERS DATA: ", users);
     return users;
-  } 
+  };
 
   const fetchOrders = async () => {
     const orders = await callApi({ url: "/orders" });
@@ -42,7 +42,22 @@ const App = () => {
     console.log("products: ", products);
     return products;
   };
- 
+
+  const [cart, setCart] = useState([]);
+  const fetchCart = async () => {
+    const cartResponse = await callApi({
+      method: "GET",
+      token,
+      url: "/orders/cart",
+    });
+    setCart(cartResponse);
+  };
+
+  useEffect(() => {
+    if (token) {
+      fetchCart();
+    }
+  }, [token]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,8 +69,8 @@ const App = () => {
         setToken(localStorage.getItem("token"));
         return;
       }
-      const users = await fetchUsers()
-      setUsers(users)
+      const users = await fetchUsers();
+      setUsers(users);
       const data = await fetchUserData(token);
       if (data) {
         setUserData(data);
@@ -72,18 +87,18 @@ const App = () => {
   }, [token]);
 
   return (
-
-    <div className='app-container'>
-  
-      <Site 
+    <div className="app-container">
+      <Site
         products={products}
         setToken={setToken}
         userData={userData}
         token={token}
         users={users}
         orders={orders}
+        cart={cart}
+        setCart={setCart}
       />
-      
+
       <p>API Status: {APIHealth}</p>
     </div>
   );

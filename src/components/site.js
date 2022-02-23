@@ -17,7 +17,16 @@ import {
   Login,
 } from "./";
 
-const Site = ({ products, setToken, userData, token, users, orders }) => {
+const Site = ({
+  products,
+  setToken,
+  userData,
+  token,
+  users,
+  orders,
+  cart,
+  setCart,
+}) => {
   return (
     <BrowserRouter>
       <NavBar setToken={setToken} token={token} />
@@ -52,6 +61,8 @@ const Site = ({ products, setToken, userData, token, users, orders }) => {
             token={token}
             users={users}
             orders={orders}
+            cart={cart}
+            setCart={setCart}
           />
         </Route>
       </Switch>

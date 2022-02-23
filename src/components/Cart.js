@@ -2,23 +2,7 @@ import React, { useEffect, useState } from "react";
 import { callApi } from "../api";
 import "../style/cart.css";
 
-const Cart = ({ token }) => {
-  const [cart, setCart] = useState([]);
-  const fetchCart = async () => {
-    const cartResponse = await callApi({
-      method: "GET",
-      token,
-      url: "/orders/cart",
-    });
-    setCart(cartResponse);
-  };
-
-  useEffect(() => {
-    if (token) {
-      fetchCart();
-    }
-  }, [token]);
-
+const Cart = ({ token, cart }) => {
   return (
     <div className="cart">
       <div>
