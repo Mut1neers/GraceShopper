@@ -53,35 +53,14 @@ async function getOrderById(orderId) {
 }
 
 async function getOrdersByUser({ id }) {
-  // console.log('orderbyUSER:', id);
   try {
     const orders = await getAllOrders();
     const filteredOrders = orders.filter((order) => order.userId === id);
-    // console.log('FILTERED ORDERS: ', filteredOrders);
     return filteredOrders;
   } catch (error) {
     throw error;
   }
 }
-
-// works vvvv
-// async function getOrdersByUser({ id }) {
-//   try {
-//     const user = await getUserById(id);
-//     const { rows: orders } = await client.query(
-//       `
-//     SELECT orders.*, users.username AS "customerName"
-//     FROM orders
-//     JOIN users ON orders."userId" = users.id
-//     WHERE "userId" = $1
-//     `,
-//       [id]
-//     );
-//     return orders;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
 
 async function getOrdersByProduct({ id }) {
   try {
@@ -98,7 +77,6 @@ async function getOrdersByProduct({ id }) {
     for (let order of orders) {
       order.products = await getProductsByOrderId(order.id);
     }
-    console.log('GET ORDERS BY PRODUCT: ', orders);
     return orders;
   } catch (error) {
     throw error;
@@ -106,42 +84,17 @@ async function getOrdersByProduct({ id }) {
 }
 
 async function getCartByUser(id) {
-  // console.log('ID: ', id);
   try {
     const orders = await getAllOrders();
     const filteredOrders = orders.filter((order) => order.userId === id && order.status === 'created');
     for (let order of filteredOrders) {
       order.products = await getProductsByOrderId(order.id);
     }
-    console.log('GET CART BY USER: ', filteredOrders);
     return filteredOrders;
   } catch (error) {
     throw error;
   }
 }
-
-// async function getCartByUser({ id }) {
-//   try {
-//     // const user = await getOrdersByUser(id);
-//     const { rows: orders } = await client.query(
-//       `
-//       SELECT orders.*, users.username AS "customerName"
-//       FROM orders
-//       JOIN users ON orders."userId" = users.id
-//       WHERE "userId" = $1
-//       AND status = 'created';
-//       `,
-//       [id]
-//     );
-//     for (let order of orders) {
-//       order.products = await getProductsByOrderId(order.id);
-//     }
-//     console.log('CART BY USER: ', orders);
-//     return orders;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
 
 async function updateOrder({ id, ...fields }) {
   try {

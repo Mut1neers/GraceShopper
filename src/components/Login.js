@@ -1,54 +1,48 @@
-import { SettingsBackupRestoreRounded } from "@material-ui/icons";
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { callApi } from "../api";
-import "../style/auth.css";
-
-// const BASE_URL = 'https://https://mutineers1.herokuapp.com/api/2108-LSU-RM-WEB-PT';
+import { SettingsBackupRestoreRounded } from '@material-ui/icons';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { callApi } from '../api';
+import '../style/auth.css';
 
 const Login = ({ setToken }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = await callApi({
-      url: "/users/login",
-      method: "POST",
+      url: '/users/login',
+      method: 'POST',
       body: { username, password },
     });
     const token = data?.token;
-    console.log("TOKEN: ", token);
     if (token) {
-      // const data = await response.json();
-      // const token = data.data.token;
-      // setTok;
-      localStorage.setItem("token", token);
-      setUsername("");
-      setPassword("");
+      localStorage.setItem('token', token);
+      setUsername('');
+      setPassword('');
       setToken(token);
-      history.push("/");
+      history.push('/');
     }
   };
   return (
-    <div id="login">
+    <div id='login'>
       <form onSubmit={handleSubmit}>
         <input
-          type="text"
+          type='text'
           value={username}
-          placeholder="Enter Username"
+          placeholder='Enter Username'
           onChange={(event) => setUsername(event.target.value)}
         ></input>
 
         <input
-          type="text"
+          type='password'
           value={password}
-          placeholder="Enter Password"
+          placeholder='Enter Password'
           onChange={(event) => setPassword(event.target.value)}
         ></input>
-        <button type="submit">Login</button>
+        <button type='submit'>Login</button>
       </form>
     </div>
   );

@@ -13,7 +13,6 @@ ordersRouter.get('/', requireAdmin, async (req, res, next) => {
   try {
     const orders = await getAllOrders();
     res.send(orders);
-    console.log('ORDERS: ', orders);
   } catch (error) {
     next(error);
   }
@@ -32,7 +31,6 @@ ordersRouter.get('/cart', requireUser, async (req, res, next) => {
 
 ordersRouter.post('/', requireUser, async (req, res, next) => {
   const { status, userId, datePlaced } = req.body;
-  //   const userId = req.user.id;
   try {
     const createdOrder = await createOrder({
       status: status,
