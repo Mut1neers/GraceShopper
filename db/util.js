@@ -14,8 +14,6 @@ function dbFields(fields) {
   return { insert, select, vals };
 }
 
-// console.log(dbFields({ name: 'Austin', username: 'austy' }));
-
 function requireUser(req, res, next) {
   if (!req.user) {
     next({

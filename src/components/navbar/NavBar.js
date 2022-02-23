@@ -26,11 +26,7 @@ useEffect(() => {
              
              
          </div>
-         <div className='search-bar'>
-             <input type='search' placeholder='Search Our Products Library'></input>
-             <button type="submit"></button>
-         <span className='fa fa-search'></span>
-         </div>
+         
         <div className='Links-block'>
             <span className='links'>
             <Link to='/'>

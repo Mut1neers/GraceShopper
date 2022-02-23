@@ -3,9 +3,13 @@ import { Grid } from "@material-ui/core";
 import { SingleProduct } from "..";
 import { Link, useHistory, useParams } from "react-router-dom";
 
+
 const searchedProducts = (product, searchTerm) => {
   const lowerCaseSearch = searchTerm.toLowerCase();
   const { price, category, title, description } = product;
+
+import "../../style/products.css";
+
 
   const toMatch = [description, category, title, price];
 

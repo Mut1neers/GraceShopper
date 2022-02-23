@@ -7,8 +7,8 @@ import { getAPIHealth } from "../axios-services";
 import "../style/App.css";
 
 const App = () => {
-  const [APIHealth, setAPIHealth] = useState("");
-  const [token, setToken] = useState("");
+  const [APIHealth, setAPIHealth] = useState('');
+  const [token, setToken] = useState('');
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useState({});
@@ -17,10 +17,9 @@ const App = () => {
 
   const fetchUserData = async (token) => {
     const data = await callApi({
-      url: "/users/me",
+      url: '/users/me',
       token,
     });
-    console.log("USERDATA: ", data);
     return data;
   };
 
@@ -28,20 +27,19 @@ const App = () => {
     const users = await callApi({
       url: "/users",
     });
-    console.log("USERS DATA: ", users);
+
     return users;
   };
 
   const fetchOrders = async () => {
-    const orders = await callApi({ url: "/orders" });
-    console.log("orders: ", orders);
+    const orders = await callApi({ url: '/orders' });
     return orders;
   };
   const fetchProducts = async () => {
-    const products = await callApi({ url: "/products" });
-    console.log("products: ", products);
+    const products = await callApi({ url: '/products' });
     return products;
   };
+
 
   const [cart, setCart] = useState([]);
   const fetchCart = async () => {
@@ -59,6 +57,7 @@ const App = () => {
     }
   }, [token]);
 
+
   useEffect(() => {
     const fetchData = async () => {
       const orders = await fetchOrders();
@@ -66,7 +65,7 @@ const App = () => {
       const products = await fetchProducts();
       setProducts(products);
       if (!token) {
-        setToken(localStorage.getItem("token"));
+        setToken(localStorage.getItem('token'));
         return;
       }
       const users = await fetchUsers();
@@ -79,15 +78,16 @@ const App = () => {
     fetchData();
     const getAPIStatus = async () => {
       const { healthy } = await getAPIHealth();
-      setAPIHealth(
-        healthy ? "api is actually freaking working! :D" : "api is down :/"
-      );
+      setAPIHealth(healthy ? 'api is actually freaking working! :D' : 'api is down :/');
     };
     getAPIStatus();
   }, [token]);
 
   return (
-    <div className="app-container">
+
+
+    <div className='app-container'>
+
       <Site
         products={products}
         setToken={setToken}

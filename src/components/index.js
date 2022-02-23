@@ -19,3 +19,5 @@ export { default as UserProfile } from './userProfile/userProfile';
 export { default as Cart } from './Cart';
 
 export { default as Login } from './Login';
+
+export { default as Footer } from './Footer';

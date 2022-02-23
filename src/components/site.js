@@ -15,6 +15,7 @@ import {
   NavBar,
   Cart,
   Login,
+  Footer
 } from "./";
 
 const Site = ({
@@ -66,6 +67,7 @@ const Site = ({
           />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 };

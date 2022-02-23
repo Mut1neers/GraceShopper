@@ -4,11 +4,7 @@ const {
   createUser,
 } = require('./models/user');
 
-const {
-  createProduct,
-  getAllProducts,
-  getProductById,
-} = require('./models/products');
+const { createProduct, getAllProducts, getProductById } = require('./models/products');
 const { createOrder, getAllOrders } = require('./models/orders');
 
 const client = require('./client');
@@ -107,10 +103,82 @@ async function populateInitialData() {
       {
         name: 'sweet monke',
         description: 'a very expensive .jpeg of a very sweet monke',
-        price: 5000,
-        imageURL: '',
-        inStock: 'false',
+        price: 50,
+        imageURL: 'https://tinyurl.com/33nraczu',
+        inStock: 'true',
         category: 'monke',
+      },
+      {
+        name: 'sour monke',
+        description: 'a very expensive .jpeg of a very sweet monke',
+        price: 40,
+        imageURL: 'https://tinyurl.com/2p9737wr',
+        inStock: 'true',
+        category: 'monke',
+      },
+      {
+        name: 'punk with shades',
+        description: 'pixel punk with rose shades',
+        price: 12,
+        imageURL: 'https://tinyurl.com/3avy5kr8',
+        inStock: 'true',
+        category: 'punk',
+      },
+      {
+        name: 'punk with cig',
+        description: 'pixel punk smoking a cigarette',
+        price: 56,
+        imageURL: 'https://tinyurl.com/bdcphnca',
+        inStock: 'true',
+        category: 'punk',
+      },
+      {
+        name: 'cool cat',
+        description: 'does anyone else think that this cat likes jazz?',
+        price: 98,
+        imageURL: 'https://tinyurl.com/24e77m53',
+        inStock: 'true',
+        category: 'cat',
+      },
+      {
+        name: 'rare froge',
+        description: 'we never have this froge in stock, but we like to list it anyways',
+        price: 99999999,
+        imageURL: 'https://tinyurl.com/2p9d8vjt',
+        inStock: 'false',
+        category: 'frog',
+      },
+      {
+        name: 'rocket shiba',
+        description: 'to the moon!',
+        price: 55,
+        imageURL: 'https://tinyurl.com/45zydp45',
+        inStock: 'true',
+        category: 'dog',
+      },
+      {
+        name: 'cyber monke',
+        description: 'insert planet of the apes reference here',
+        price: 100,
+        imageURL: 'https://tinyurl.com/ypxhf68n',
+        inStock: 'true',
+        category: 'monke',
+      },
+      {
+        name: 'the bored bunny',
+        description: "well he doesn't look bored",
+        price: 1,
+        imageURL: 'https://tinyurl.com/mrx7fsv9',
+        inStock: 'true',
+        category: 'bunny',
+      },
+      {
+        name: 'banana bird',
+        description: "don't look him directly in the eye...",
+        price: 0.99,
+        imageURL: 'https://tinyurl.com/4t4zrb7f',
+        inStock: 'true',
+        category: 'bird',
       },
     ];
     const products = await Promise.all(productsToCreate.map(createProduct));
@@ -137,9 +205,7 @@ async function populateInitialData() {
         quantity: 1,
       },
     ];
-    const orderProducts = await Promise.all(
-      orderProductsToCreate.map(addProductToOrder)
-    );
+    const orderProducts = await Promise.all(orderProductsToCreate.map(addProductToOrder));
     console.log('order_products created: ', orderProducts);
     console.log('Finished creating order_products!');
   } catch (error) {

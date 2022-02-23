@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Card,
@@ -10,8 +11,11 @@ import {
 import { AddShoppingCart } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
+
+
 import useStyles from "./singleProductStyles";
 import { callApi } from "../../api";
+
 
 const SingleProduct = ({ product, cart, setCart }) => {
   const classes = useStyles();
@@ -30,11 +34,13 @@ const SingleProduct = ({ product, cart, setCart }) => {
           <Typography variant="h4">{product.price}</Typography>
         </div>
         <Typography variant="body2" color="textSecondary">
+
           {product.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
         <Link to={`/products/${product.id}`}>
+
           {" "}
           <button>Clik Here</button>{" "}
         </Link>
@@ -44,6 +50,7 @@ const SingleProduct = ({ product, cart, setCart }) => {
               console.log(cart);
             }}
           />
+
         </IconButton>
       </CardActions>
     </Card>
