@@ -1,0 +1,12 @@
+.title {
+    font-size: 36px;
+    color: #ffa400;
+    background-color: #2a2a72;
+    padding: 12px;
+   margin-top: 24px;
+   margin-left: 120px;
+   margin-right: 120px;
+    display: flex;
+    justify-content: center;
+    
+}
