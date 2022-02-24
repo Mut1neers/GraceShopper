@@ -22,9 +22,9 @@ const Site = ({ products, setToken, userData, token, users, orders }) => {
     const [cart, setCart] = useState([])
     const addToCart = (product) => {
         
-        console.log("product Clicked", product)
+      
         const inCart = cart.find((cartItem) => cartItem.id === product.id) 
-        console.log('inCart', inCart)
+        
         if (inCart) {
           setCart(cart.map((cartItem) => 
             cartItem.id === product.id ? {...inCart, ammount: inCart.ammount + 1} : cartItem))
