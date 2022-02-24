@@ -31,8 +31,12 @@
 }
 
 .banner .title {
-    font-size: 45px;
-    margin-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+        width:105%;
+
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
