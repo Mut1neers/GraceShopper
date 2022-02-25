@@ -21,15 +21,6 @@ const AccountForm = ({ action, setToken }) => {
   const oppositeTitle = isLogin ? "New User?" : "Already have an account?";
   const oppositeAction = isLogin ? "register" : "login";
   const history = useHistory();
-  // const actionURL = isLogin ? API_LOGIN : API_REGISTER;
-
-  // const Register = () => {
-  //   const [username, setUsername] = useState("");
-  //   const [password, setPassword] = useState("");
-  //   const [firstName, setFirstName] = useState("");
-  //   const [lastName, setLastName] = useState("");
-  //   const [email, setEmail] = useState("");
-  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,7 +35,7 @@ const AccountForm = ({ action, setToken }) => {
       console.log("FirstName", firstName);
       console.log("DATA: ", data);
       const token = data?.token;
-      // const token = token;
+      
       console.log("TOKEN: ", token);
       if (token) {
         localStorage.setItem("token", token);

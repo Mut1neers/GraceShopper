@@ -6,7 +6,6 @@ const UserProfile = ({ userData, token, users, orders }) => {
 
   const user = users.find((user) => userData.id === user.id);
 
-  // const ordersToDisplay = orders.filter((order) => order.userId === userData.id)
 
   return (
     <div>

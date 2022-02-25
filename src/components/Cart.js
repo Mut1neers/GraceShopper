@@ -1,26 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {useHistory} from 'react-router-dom'
-import { callApi } from "../api";
 import "../style/cart.css";
 
-const Cart = ({ token, cart, setCart, removeFromCart, addToCart}) => {
+const Cart = ({ cart, setCart, removeFromCart }) => {
   const history = useHistory()
-  // const [cart, setCart] = useState([]);
-  // const fetchCart = async () => {
-  //   const cartResponse = await callApi({
-  //     method: "GET",
-  //     token,
-  //     url: "/orders/cart",
-  //   });
-  //   setCart(cartResponse);
-  // };
-
-  // useEffect(() => {
-  //   if (token) {
-  //     fetchCart();
-  //   }
-  // }, [token]);
-
   const checkOut = (event) => {
     setCart('') 
     history.push('/')
